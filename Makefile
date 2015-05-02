@@ -6,7 +6,7 @@
 #    By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/02 20:16:27 by tdieumeg         ###   ########.fr        #
+#    Updated: 2015/05/02 21:12:36 by tdieumeg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW
 
 # source files
 SRCS			= main.c \
-				  ball.c
+				  ball.c \
+				  level_loader.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))

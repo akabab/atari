@@ -23,8 +23,12 @@ void window_size_callback(GLFWwindow* window, int width, int height)
     // ft_printf("resize-> width: %d, height: %d\n", width, height);
 }
 
-int main(void)
+int main(int ac, char *av[])
 {
+    t_level     levels[N_LEVELS];
+
+    load_levels(levels);
+
     GLFWwindow* window;
 
     glfwSetErrorCallback(error_callback);
@@ -76,9 +80,13 @@ int main(void)
 
         // glLoadIdentity();
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+
+		//
+		draw_level(&levels[ft_atoi(av[1])]);
 		if (!updateBall(&ball))
 			break ;
 		drawBall(&ball);
+
         //draw triangle
 		/*glBegin(GL_TRIANGLES);
         glColor3f(1.f, 0.f, 0.f);
@@ -100,4 +108,6 @@ int main(void)
     glfwDestroyWindow(window);
     glfwTerminate();
     exit(EXIT_SUCCESS);
+
+    return (0);
 }
