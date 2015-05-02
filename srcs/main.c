@@ -24,6 +24,13 @@ void window_size_callback(GLFWwindow* window, int width, int height)
 
 int main(void)
 {
+    load_levels();
+
+    return (EXIT_SUCCESS);
+}
+
+int _main(void)
+{
     GLFWwindow* window;
 
     glfwSetErrorCallback(error_callback);
@@ -66,10 +73,10 @@ int main(void)
         //clear screen
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // glMatrixMode(GL_PROJECTION);
-        // glLoadIdentity();
-        // glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        // glMatrixMode(GL_MODELVIEW);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+        glMatrixMode(GL_MODELVIEW);
 
         // glLoadIdentity();
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
@@ -95,4 +102,6 @@ int main(void)
     glfwDestroyWindow(window);
     glfwTerminate();
     exit(EXIT_SUCCESS);
+
+    return (0);
 }

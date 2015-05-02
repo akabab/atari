@@ -40,7 +40,8 @@ LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
 CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW # -Wall -Wextra -Werror
 
 # source files
-SRCS			= main.c
+SRCS			= main.c			\
+				  level_loader.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
