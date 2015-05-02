@@ -24,7 +24,9 @@ void window_size_callback(GLFWwindow* window, int width, int height)
 
 int main(void)
 {
-    load_levels();
+    t_level     levels[N_LEVELS];
+
+    load_levels(&levels);
 
     return (EXIT_SUCCESS);
 }
