@@ -1,10 +1,8 @@
 #ifndef ATARI_H
 # define ATARI_H
 
-# include "libft.h"
-# include <glfw3.h>
-# include <stdlib.h>
-# include <stdio.h>
+#include <stdlib.h>
+#include "ball.h"
 
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
@@ -39,7 +37,12 @@ typedef struct		s_level
 	int				blocks[LEVEL_HEIGHT][LEVEL_WIDTH];
 }					t_level;
 
-void	load_levels(t_level levels[]);
-void	draw_level(t_level *level);
+int					initGLFW(GLFWwindow **window);
+int					cleanGLFW(GLFWwindow *window);
+
+void				load_levels(t_level levels[]);
+void				draw_level(t_level *level);
+
+int					renderer(GLFWwindow *window, t_level *levels, t_ball *ball, int level_index);
 
 #endif

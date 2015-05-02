@@ -1,6 +1,7 @@
+#include <fcntl.h>
+#include <glfw3.h>
 #include "atari.h"
 #include "libft.h"
-#include <fcntl.h>
 
 void	display_level(t_level *level)
 {
