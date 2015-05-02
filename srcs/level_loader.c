@@ -21,6 +21,44 @@ void	display_level(t_level *level)
 	}
 }
 
+void	draw_level(t_level *level)
+{
+	int i;
+	int j;
+
+	float block_w = 2.0f / (LEVEL_WIDTH + 0.01f);
+	float block_h = 0.5f / (LEVEL_HEIGHT + 0.01f);
+
+	j = 0;
+	while (j < LEVEL_HEIGHT)
+	{
+		i = 0;
+		while (i < LEVEL_WIDTH)
+		{
+			if (level->blocks[j][i])
+			{
+				int val = level->blocks[j][i];
+				switch (val)
+				{
+					case 1:
+						glColor3f(0.0f, 0.0f, 0.8f);
+						break;
+					case 3:
+						glColor3f(0.0f, 0.8f, 0.0f);
+						break;
+					case 9:
+						glColor3f(0.5f, 0.0f, 0.0f);
+						break;
+				}
+				glRectf(-1.f + (float)i * block_w, 1.f - (float)j * block_h,
+						-1.f + (float)(i+1) * block_w, 1.f - (float)(j+1) * block_h);
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
 void	parse_level(int fd, t_level *level)
 {
 	char	*line;

@@ -22,17 +22,12 @@ void window_size_callback(GLFWwindow* window, int width, int height)
     // ft_printf("resize-> width: %d, height: %d\n", width, height);
 }
 
-int main(void)
+int main(int ac, char *av[])
 {
     t_level     levels[N_LEVELS];
 
-    load_levels(&levels);
+    load_levels(levels);
 
-    return (EXIT_SUCCESS);
-}
-
-int _main(void)
-{
     GLFWwindow* window;
 
     glfwSetErrorCallback(error_callback);
@@ -75,23 +70,25 @@ int _main(void)
         //clear screen
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        glMatrixMode(GL_MODELVIEW);
+        // glMatrixMode(GL_PROJECTION);
+        // glLoadIdentity();
+        // glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+        // glMatrixMode(GL_MODELVIEW);
 
         // glLoadIdentity();
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
 
+        draw_level(&levels[ft_atoi(av[1])]);
+
         //draw triangle
-        glBegin(GL_TRIANGLES);
-        glColor3f(1.f, 0.f, 0.f);
-        glVertex3f(-0.6f, -0.4f, 0.f);
-        glColor3f(0.f, 1.f, 0.f);
-        glVertex3f(0.6f, -0.4f, 0.f);
-        glColor3f(0.f, 0.f, 1.f);
-        glVertex3f(0.f, 0.6f, 0.f);
-        glEnd();
+        // glBegin(GL_TRIANGLES);
+        // glColor3f(1.f, 0.f, 0.f);
+        // glVertex3f(-0.6f, -0.4f, 0.f);
+        // glColor3f(0.f, 1.f, 0.f);
+        // glVertex3f(0.6f, -0.4f, 0.f);
+        // glColor3f(0.f, 0.f, 1.f);
+        // glVertex3f(0.f, 0.6f, 0.f);
+        // glEnd();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

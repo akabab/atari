@@ -1,6 +1,8 @@
 #ifndef ATARI_H
 # define ATARI_H
 
+# include "libft.h"
+# include <glfw3.h>
 # include <stdlib.h>
 # include <stdio.h>
 
@@ -13,7 +15,7 @@
 # define NO_BLOCK_CHAR	'_'
 # define STATIC_BLOCK	9
 
-# define N_LEVELS		1
+# define N_LEVELS		3
 # define LEVEL_PATH		"./levels/level_"
 
 /*
@@ -32,11 +34,12 @@
 # define CB(X)			"\x1B[48;1;"X"m"
 # define CBNO			"\x1B[0m"
 
-void	load_levels();
-
 typedef struct		s_level
 {
 	int				blocks[LEVEL_HEIGHT][LEVEL_WIDTH];
 }					t_level;
+
+void	load_levels(t_level levels[]);
+void	draw_level(t_level *level);
 
 #endif
