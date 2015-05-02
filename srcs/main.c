@@ -1,5 +1,5 @@
 #include "atari.h"
-#include <GLFW/glfw3.h>
+#include <glfw3.h>
 
 int main(void)
 {

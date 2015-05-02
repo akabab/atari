@@ -3,59 +3,84 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
+#    By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/11/26 16:39:11 by ycribier          #+#    #+#              #
-#    Updated: 2015/02/20 14:32:41 by ycribier         ###   ########.fr        #
+#    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
+#    Updated: 2015/05/02 16:33:25 by tdieumeg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				=	clang
-FLAGS			=	-Wall -Wextra -Werror
-NAME			=	atari
-LIB				=	libft/libft.a
-LIB_PATH		=	libft/
-INCLUDES		=	-I $(LIB_PATH)./includes -I ./includes
-SRCS			=	srcs/atari.c
-OBJS			=	$(SRCS:srcs/%.c=objs/%.o)
+# binaries
+CC				= /usr/bin/clang
+RM				= /bin/rm
+MAKE			= /usr/bin/make
+MKDIR			= /bin/mkdir
+GIT				= /usr/bin/git
+CMAKE			= $(HOME)/.brew/bin/cmake
+BREW			= $(HOME)/.brew/bin/brew
 
-# COLORS
-C_NO			=	"\033[00m"
-C_OK			=	"\033[35m"
-C_GOOD			=	"\033[32m"
-C_ERROR			=	"\033[31m"
-C_WARN			=	"\033[33m"
+# app name
+NAME			= arkanoid
 
-# DBG MESSAGE
-SUCCESS			=	$(C_GOOD)SUCCESS$(C_NO)
-OK				=	$(C_OK)OK$(C_NO)
+# dir
+ROOT			= $(shell pwd)
+GLFW_LIB_DIR	= $(ROOT)/openGLlib
+LIBFTDIR		= $(ROOT)/libft
+OBJDIR			= $(ROOT)/objs
+SRCDIR			= $(ROOT)/srcs
+INCDIR			= $(ROOT)/includes
 
-all: obj $(NAME)
+# lib
+LIBFT			= $(LIBFTDIR)/libft.a
+LIBGLFW			= $(GLFW_LIB_DIR)/src/libglfw3.a
 
-$(NAME): $(LIB) $(OBJS)
-	@$(CC) $(FLAGS) -o $@ $^ -L $(LIB_PATH) -lft
-	@echo "Compiling" [ $(NAME) ] $(SUCCESS)
+# compil flags
+FRAMEWORK		= -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
+CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW # -Wall -Wextra -Werror
 
-$(LIB):
-	@make -C $(LIB_PATH)
+# source files
+SRCS			= main.c
 
-obj:
-	@mkdir -p objs
+# obj
+OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 
-objs/%.o: srcs/%.c ./inc/atari.h
-	@$(CC) $(FLAGS) -c -o $@ $< $(INCLUDES)
-	@echo "Linking" [ $< ] $(OK)
+.PHONY: all clean fclean re
+
+all: $(CMAKE) openGLlib/CMakeLists.txt $(LIBGLFW) $(LIBFT) $(OBJDIR) $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $< -o $@ -c $(CFLAGS)
+
+$(OBJDIR):
+	$(MKDIR) $@
+
+$(BREW):
+	/usr/local/bin/brew update
+
+$(CMAKE):
+	$(BREW) update
+	$(BREW) install cmake
+
+openGLlib/CMakeLists.txt:
+	$(GIT) submodule init
+	$(GIT) submodule update
+
+$(LIBGLFW):
+	cd $(GLFW_LIB_DIR) && \
+	$(CMAKE) . && \
+	$(MAKE)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFTDIR)
 
 clean:
-	@rm -f $(OBJS)
-	@rm -rf objs
-	@echo "Cleaning" [ $(NAME) ] "..." $(OK)
+	$(RM) -rf $(OBJDIR)
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C $(LIB_PATH) fclean
-	@echo "Delete" [ $(NAME) ] $(OK)
+	$(RM) -f $(NAME)
 
 re: fclean all
-
-.PHONY: clean all re fclean

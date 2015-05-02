@@ -1,0 +1,3 @@
+[submodule "openGLlib"]
+	path = openGLlib
+	url = https://github.com/glfw/glfw.git
