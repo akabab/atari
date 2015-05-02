@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "ball.h"
 
 static void error_callback(int error, const char* description)
 {
@@ -52,6 +53,8 @@ int main(void)
     /* */
     glfwSetKeyCallback(window, key_callback);
 
+	t_ball ball;
+	initBall(&ball);
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -73,16 +76,18 @@ int main(void)
 
         // glLoadIdentity();
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
-
+		if (!updateBall(&ball))
+			break ;
+		drawBall(&ball);
         //draw triangle
-        glBegin(GL_TRIANGLES);
+		/*glBegin(GL_TRIANGLES);
         glColor3f(1.f, 0.f, 0.f);
         glVertex3f(-0.6f, -0.4f, 0.f);
         glColor3f(0.f, 1.f, 0.f);
         glVertex3f(0.6f, -0.4f, 0.f);
         glColor3f(0.f, 0.f, 1.f);
         glVertex3f(0.f, 0.6f, 0.f);
-        glEnd();
+        glEnd();*/
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

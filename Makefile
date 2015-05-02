@@ -6,7 +6,7 @@
 #    By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/02 16:33:25 by tdieumeg         ###   ########.fr        #
+#    Updated: 2015/05/02 20:16:27 by tdieumeg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
 CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW # -Wall -Wextra -Werror
 
 # source files
-SRCS			= main.c
+SRCS			= main.c \
+				  ball.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
