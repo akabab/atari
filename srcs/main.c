@@ -18,22 +18,28 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 int main(void)
 {
     GLFWwindow* window;
+
     glfwSetErrorCallback(error_callback);
+
     if (!glfwInit())
         exit(EXIT_FAILURE);
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+
+    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Atari", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
+
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     glfwSetKeyCallback(window, key_callback);
+
     while (!glfwWindowShouldClose(window))
     {
         float ratio;
         int width, height;
+
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float) height;
         glViewport(0, 0, width, height);
@@ -52,9 +58,11 @@ int main(void)
         glColor3f(0.f, 0.f, 1.f);
         glVertex3f(0.f, 0.6f, 0.f);
         glEnd();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
     glfwDestroyWindow(window);
     glfwTerminate();
     exit(EXIT_SUCCESS);
