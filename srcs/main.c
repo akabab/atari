@@ -82,7 +82,10 @@ int main(int ac, char *av[])
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
 
 		//
-		draw_level(&levels[ft_atoi(av[1])]);
+        int level_index;
+        if (ac > 1)
+            level_index = ac > 1 ? ft_atoi(av[1]) : 0;
+		draw_level(&levels[level_index]);
 		if (!updateBall(&ball))
 			break ;
 		drawBall(&ball);

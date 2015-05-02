@@ -103,8 +103,7 @@ void	parse_level(int fd, t_level *level)
 		ft_printf("Err: %s: wrong height\n", __func__);
 		exit(EXIT_FAILURE);
 	}
-	//no errors
-	display_level(level);
+	// display_level(level);
 }
 
 void	load_levels(t_level levels[])
