@@ -1,4 +1,5 @@
 #include "atari.h"
+#include "libft.h"
 #include <glfw3.h>
 
 #include <stdlib.h>
@@ -15,6 +16,12 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
+/* received new win size after resize */
+void window_size_callback(GLFWwindow* window, int width, int height)
+{
+    // ft_printf("resize-> width: %d, height: %d\n", width, height);
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -26,12 +33,15 @@ int main(void)
         exit(EXIT_FAILURE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Atari", NULL, NULL);
+    window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Atari", NULL, NULL); //glfwGetPrimaryMonitor(), NULL); for full screen
     if (!window)
     {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
+
+    /* notified when a window is resized */
+    glfwSetWindowSizeCallback(window, window_size_callback);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
@@ -56,13 +66,13 @@ int main(void)
         //clear screen
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        glMatrixMode(GL_MODELVIEW);
+        // glMatrixMode(GL_PROJECTION);
+        // glLoadIdentity();
+        // glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+        // glMatrixMode(GL_MODELVIEW);
 
-        glLoadIdentity();
-        glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
+        // glLoadIdentity();
+        // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
 
         //draw triangle
         glBegin(GL_TRIANGLES);
