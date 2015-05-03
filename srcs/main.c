@@ -15,14 +15,30 @@ void	reset_viewport(GLFWwindow *window)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
-t_game	*init_game(void)
-{
-	t_game	*game;
+// void			free_all(t_ps *ps)
+// {
+// 	t_env	*e;
 
-	game = (t_game *)ft_memalloc(sizeof(t_game));
+// 	if ((e = mlx_env_instance(NULL)))
+// 		free_env(e);
+// 	dlist_destroy(ps->stack_a);
+// 	dlist_destroy(ps->stack_b);
+// 	free(ps->origin_data);
+// 	free(ps);
+// }
+
+t_game		*get_game(void)
+{
+	static t_game	*game = NULL;
+
 	if (!game)
-		exit(EXIT_FAILURE);
-	load_levels(game->levels);
+	{
+		game = (t_game *)ft_memalloc(sizeof(t_game));
+		if (!game)
+			exit(EXIT_FAILURE);
+		load_levels(game->levels);
+		game->keys = init_keys();
+	}
 	return (game);
 }
 
@@ -37,7 +53,7 @@ int		main(int ac, char *av[])
 	t_game		*game;
 
 	init_glfw(&window);
-	game = init_game();
+	game = get_game();
 	game->cur_level_index = ac > 1 ? ft_atoi(av[1]) : 0; //
 
 	/* Loop until the user closes the window */

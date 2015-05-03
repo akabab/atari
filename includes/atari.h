@@ -85,13 +85,21 @@ typedef struct		s_brick
 	int				val;
 }					t_brick;
 
+# define PAD_INIT_X			0.f
+# define PAD_INIT_Y			-1.f + 0.1f
+# define PAD_INIT_WIDTH		1.f
+# define PAD_INIT_HEIGHT	0.2f
+# define PAD_INIT_SCALE		1.f
+# define PAD_INIT_SPEED		1.f
+
 typedef struct		s_pad
 {
 	float			x0;
 	float			y0;
 	float			x1;
 	float			y1;
-	float			scale_factor;
+	float			scale;
+	float			speed;
 }					t_pad;
 
 typedef struct		s_level
@@ -103,14 +111,26 @@ typedef struct		s_level
 	t_ball			*ball;
 }					t_level;
 
+typedef struct			s_keys
+{
+	t_bool	up;
+	t_bool	down;
+	t_bool	right;
+	t_bool	left;
+}						t_keys;
+
 typedef struct		s_game
 {
 	t_level			*levels[N_LEVELS];
 	t_level			*cur_level;
 	int				cur_level_index;
+	t_keys			*keys;
 }					t_game;
 
-
+/*
+**		main.c
+*/
+t_game				*get_game(void);
 void				reset_viewport(GLFWwindow *window);
 
 /*
@@ -129,7 +149,11 @@ void				draw_level(t_level *level);
 */
 void				load_levels(t_level *levels[]);
 
-int					renderer(GLFWwindow *window, t_level *levels, t_ball *ball, int level_index);
+/*
+**		keys.c
+*/
+void				handle_arrow_keys(t_keys *keys, int key, int action);
+t_keys				*init_keys(void);
 
 /*
 **		err.c

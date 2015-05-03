@@ -7,8 +7,20 @@ static void			error_callback(int error, const char *description)
 
 static void			key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
+    t_game      *game;
+    t_keys      *keys;
+
+    game = get_game();
+    keys = game->keys;
+    handle_arrow_keys(keys, key, action);
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+    // if (action == GLFW_REPEAT)
+    //     printf("repeat\n");
+    // if (action == GLFW_PRESS)
+    //     printf("press\n");
+    // if (action == GLFW_RELEASE)
+    //     printf("release\n");
 }
 
 /* received new win size after resize */
