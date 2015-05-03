@@ -49,7 +49,6 @@ void				update_ball(t_ball *ball, t_list_node *bricks)
 	i = 0;
 	while (i < 10)
 	{
-
 		ball->x += (ball->speedx) / 10.0f;
 		ball->y += (ball->speedy) / 10.0f;
 		handle_bounds(ball);

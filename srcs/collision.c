@@ -206,4 +206,3 @@ int				check_collisions(t_ball *ball, t_list_node *bricks)
 	}
 	return (1);
 }
-

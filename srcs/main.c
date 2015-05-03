@@ -15,7 +15,7 @@ void			reset_viewport(GLFWwindow *window)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
-void			free_all()
+void			free_all(void)
 {
 	t_game		*game;
 

@@ -51,7 +51,7 @@ void				draw_text(float x, float y, char *str, void *font)
 	int		len;
 	int		i;
 
-	glRasterPos2f(x,y);
+	glRasterPos2f(x, y);
 	len = ft_strlen(str);
 	i = 0;
 	while (i < len)

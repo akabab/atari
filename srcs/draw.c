@@ -82,4 +82,3 @@ void				draw_level(t_level *level)
 	draw_lives(level->lives);
 	draw_score(level->score);
 }
-

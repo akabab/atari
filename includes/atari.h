@@ -229,7 +229,7 @@ t_pad				*init_pad(void);
 /*
 **		err.c
 */
-void				handle_errors(const char __func[], char *err, t_bool is_critic);
+void				handle_errors(const char func[], char *err, t_bool is_critic);
 
 /*
 **		level.c

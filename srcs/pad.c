@@ -55,7 +55,7 @@ void					update_pad(t_pad *pad, t_ball *ball)
 	check_pad(ball, pad);
 }
 
-t_pad				*init_pad(void)
+t_pad					*init_pad(void)
 {
 	t_pad	*pad;
 
