@@ -29,17 +29,16 @@ CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW
 
 # source files
 SRCS			= main.c \
-				  glfw_handler.c \
-				  level_loader.c \
-				  ball.c \
-				  collision.c \
-				  rebound.c \
-				  level.c \
-				  draw.c \
-				  pad.c \
-				  keys.c \
-				  math.c \
-				  err.c
+				glfw_handler.c \
+				level_loader.c \
+				collision.c \
+				rebound.c \
+				draw.c \
+				level.c \
+				ball.c \
+				pad.c \
+				keys.c \
+				err.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))

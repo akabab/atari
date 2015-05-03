@@ -58,7 +58,7 @@ void				update_ball(t_ball *ball, t_list_node *bricks)
 			game->cur_level->lives--;
 			reset_ball(ball);
 		}
-		check_collisions(ball, bricks); //mv
+		check_collisions(ball, bricks);
 		i++;
 	}
 }
