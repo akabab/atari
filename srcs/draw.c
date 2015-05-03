@@ -22,10 +22,10 @@ static void			draw_brick(t_brick *brick)
 		glColor3ub(ORANGE);
 	else if (val == 3)
 		glColor3ub(PINK);
-	else if (val == 9)
+	else if (val == STATIC_BRICK)
 		glColor3ub(LIGHT_GREY);
 	else
-		glColor3ub(CYAN);
+		glColor3ub(117 - val * 12, 176 - val * 12, 195 - val * 12);
 	glRectf(brick->x0 + BRICK_BORDER, brick->y1 - BRICK_BORDER,
 			brick->x1 - BRICK_BORDER, brick->y0 + BRICK_BORDER);
 }

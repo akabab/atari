@@ -23,11 +23,6 @@ static void			key_callback(
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	if (key == GLFW_KEY_2 && action == GLFW_PRESS)
 		load_level(game, 2);
-	// if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-	// {
-	// 	pad->x0 = pad->x0 - (PAD_INIT_WIDTH * pad->scale) / 2;
-	// 	pad->x1 = pad->x1 + (PAD_INIT_WIDTH * pad->scale) / 2;
-	// }
 }
 
 static void			window_size_callback(

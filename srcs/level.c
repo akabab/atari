@@ -25,8 +25,8 @@ void				load_level(t_game *game, int level_index)
 	}
 	else
 	{
-		//congratz -> game finished
-		ft_putendl("congratz");
+		ft_putendl("congratz!");
+		sleep(1);
 		free_all();
 		exit(EXIT_SUCCESS);
 	}
@@ -44,6 +44,7 @@ void				handle_levels(t_game *game)
 	if (!INVINCIBLE_MODE && cur_level->lives <= 0)
 	{
 		ft_putendl("game over!");
+		sleep(1);
 		free_all();
 		exit(EXIT_SUCCESS);
 	}

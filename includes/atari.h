@@ -33,7 +33,7 @@
 # define NO_BRICK_CHAR		'_'
 # define STATIC_BRICK		9
 
-# define N_LEVELS			3
+# define N_LEVELS			9
 # define LEVEL_PATH			"./levels/level_"
 
 # define INIT_SCORE			0
@@ -96,7 +96,7 @@ typedef struct		s_brick
 }					t_brick;
 
 # define BALL_ORIGIN_X		0.0f
-# define BALL_ORIGIN_Y		0.0f
+# define BALL_ORIGIN_Y		(0.0f - 0.3f)
 # define BALL_RADIUS		0.03f
 # define BALL_ORIGIN_SPEEDX	0.018
 # define BALL_ORIGIN_SPEEDY	0.025
