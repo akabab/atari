@@ -2,17 +2,11 @@
 
 int					rebound(t_ball *ball, t_brick *brick, int side)
 {
-	float			tab[5];
-	float			tmp;
-
-	tmp = ball->rad;
-	tab[0] = fmod((tmp + M_PI), (2 * M_PI));
-	tab[1] = tmp * -1;
-	tab[2] = fmod((M_PI - tmp), (2 * M_PI));
-	tab[3] = tmp * -1;
-	tab[4] = fmod((M_PI - tmp), (2 * M_PI));
-	ball->rad = tab[side];
-	if (brick->val != STATIC_BRICK)
+	if (brick->val != 9)
 		brick->val--;
+	if (side == 1 || side == 3)
+		ball->speedy = -ball->speedy;
+	if (side == 2 || side == 4)
+		ball->speedx = -ball->speedx;
 	return (1);
 }

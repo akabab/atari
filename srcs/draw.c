@@ -40,8 +40,8 @@ static void			draw_ball(t_ball *ball)
 	i = 0;
 	while (i < 20)
 	{
-		x = ball->x + ball->r * (cos(i * 2.0f * M_PI / 20.0f));
-		y = ball->y + ball->r * (sin(i * 2.0f * M_PI / 20.0f));
+		x = ball->x + ball->r * (cos(i * 2.0f * PI / 20.0f));
+		y = ball->y + ball->r * (sin(i * 2.0f * PI / 20.0f));
 		glVertex2f(x, y);
 		i++;
 	}
