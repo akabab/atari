@@ -42,7 +42,7 @@ void				handle_levels(t_game *game)
 		ft_putendl("load next lvl");
 		load_level(game, game->cur_level_index + 1);
 	}
-	if (cur_level->lives <= 0)
+	if (!INVINCIBLE_MODE && cur_level->lives <= 0)
 	{
 		ft_putendl("game over!");
 		exit(EXIT_SUCCESS);

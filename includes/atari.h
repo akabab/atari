@@ -12,8 +12,10 @@
 # include "libft.h"
 # include "list.h"
 
-#define SQRT_2			1.414213
-#define PI				3.141592
+# define INVINCIBLE_MODE	1
+
+# define SQRT_2			1.414213
+# define PI				3.141592
 
 # define WIN_WIDTH		600
 # define WIN_HEIGHT		600
