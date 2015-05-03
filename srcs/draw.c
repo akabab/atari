@@ -82,7 +82,7 @@ void				draw_level(t_level *level)
 	}
 	update_ball(level->ball, level->brick_list);
 	draw_ball(level->ball);
-	update_pad(level->pad);
+	update_pad(level->pad, level->ball);
 	draw_pad(level->pad);
 	draw_level_border();
 	draw_lives(level->lives);
