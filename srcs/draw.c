@@ -25,8 +25,8 @@ void			draw_brick(t_brick *brick)
 		glColor3ub(LIGHT_GREY);
 	else
 		glColor3ub(CYAN);
-	glRectf(brick->x0 + BRICK_BORDER, brick->y0 - BRICK_BORDER,
-			brick->x1 - BRICK_BORDER, brick->y1 + BRICK_BORDER);
+	glRectf(brick->x0 + BRICK_BORDER, brick->y1 - BRICK_BORDER,
+			brick->x1 - BRICK_BORDER, brick->y0 + BRICK_BORDER);
 }
 
 void			draw_level(t_level *level)
