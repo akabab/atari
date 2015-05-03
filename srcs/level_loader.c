@@ -54,7 +54,7 @@ static t_level	*init_level(void)
 	level->lives = INIT_LIVES;
 	level->brick_list = NULL;
 	level->ball = init_ball();
-	// level->pad = init_pad();
+	level->pad = init_pad();
 	return (level);
 }
 

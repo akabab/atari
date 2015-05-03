@@ -37,16 +37,16 @@
 **		COLOR
 **						|R|, |G|, |B|
 */
-# define PINK			217, 036, 105
+# define PINK			217,  36, 105
 # define PURPLE			157, 124, 255
 # define CYAN			117, 176, 195
 # define YELLOW			227, 219, 115
-# define ORANGE			228, 126, 000
-# define GREEN			177, 227, 054
-# define BROWN			115, 111, 079
-# define DARK_GREY		044, 044, 039
+# define ORANGE			228, 126,   0
+# define GREEN			177, 227,  54
+# define BROWN			115, 111,  79
+# define DARK_GREY		 44,  44,  39
 # define LIGHT_GREY		142, 143, 137
-# define BLACK			000, 000, 000
+# define BLACK			  0,   0,   0
 # define WHITE			255, 255, 255
 
 /*
@@ -103,11 +103,11 @@ typedef struct		s_ball
 }					t_ball;
 
 # define PAD_INIT_X			0.f
-# define PAD_INIT_Y			-1.f + 0.1f
-# define PAD_INIT_WIDTH		1.f
-# define PAD_INIT_HEIGHT	0.2f
+# define PAD_INIT_Y			(-1.f + 0.1f)
+# define PAD_INIT_WIDTH		0.5f
+# define PAD_INIT_HEIGHT	0.08f
 # define PAD_INIT_SCALE		1.f
-# define PAD_INIT_SPEED		1.f
+# define PAD_INIT_SPEED		0.01f
 
 typedef struct		s_pad
 {
@@ -177,6 +177,12 @@ void				load_levels(t_level *levels[]);
 */
 void				handle_arrow_keys(t_keys *keys, int key, int action);
 t_keys				*init_keys(void);
+
+/*
+**		pad.c
+*/
+void				update_pad(t_pad *pad);
+t_pad				*init_pad(void);
 
 /*
 **		err.c
