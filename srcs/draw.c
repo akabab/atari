@@ -66,24 +66,52 @@ static void			draw_pad(t_pad *pad)
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }
 
-void				draw_circle(float pos_x, float pos_y)
+static void			draw_circle(float pos_x, float pos_y)
 {
-	float		x;
-	float		y;
-	int			i;
+	float			x;
+	float			y;
+	int				i;
+	float			radius;
 
-	glBegin(GL_POLYGON);
-	glColor3ub(PINK);
-	i = 0;
-	while (i < 20)
+	radius = 0.02f;
+	y = -radius;
+	while (y <= radius)
 	{
-		x = pos_x + 0.02f * (cos(i * 2.0f * M_PI / 20.0f));
-		y = pos_y + 0.02f * (sin(i * 2.0f * M_PI / 20.0f));
-		glVertex2f(x, y);
-		i++;
+		x = -radius;
+		while (x <= radius)
+		{
+			if ((x * x + y * y) <= (radius * radius))
+			{
+				glPointSize(1);
+				glBegin(GL_POINTS);
+				glColor3ub(PINK);
+				glVertex2f(pos_x + x, pos_y + y);
+				glEnd();
+			}
+			x += 0.0025f;
+		}
+		y += 0.0025f;
 	}
-	glEnd();
 }
+
+// void				_draw_circle(float pos_x, float pos_y)
+// {
+// 	float		x;
+// 	float		y;
+// 	int			i;
+
+// 	glBegin(GL_POLYGON);
+// 	glColor3ub(PINK);
+// 	i = 0;
+// 	while (i < 20)
+// 	{
+// 		x = pos_x + 0.02f * (cos(i * 2.0f * M_PI / 20.0f));
+// 		y = pos_y + 0.02f * (sin(i * 2.0f * M_PI / 20.0f));
+// 		glVertex2f(x, y);
+// 		i++;
+// 	}
+// 	glEnd();
+// }
 
 void				draw_lives(int n_lives)
 {
