@@ -23,6 +23,16 @@ void window_size_callback(GLFWwindow* window, int width, int height)
     // ft_printf("resize-> width: %d, height: %d\n", width, height);
 }
 
+void draw_rect(double largeur,double hauteur)
+{
+    glBegin(GL_QUADS);
+    glVertex2d(0,-hauteur/2);
+    glVertex2d(0,hauteur/2);
+    glVertex2d(largeur,hauteur/2);
+    glVertex2d(largeur,-hauteur/2);
+    glEnd();
+}
+
 int main(int ac, char *av[])
 {
     t_level     levels[N_LEVELS];
@@ -73,6 +83,12 @@ int main(int ac, char *av[])
         //clear screen
         glClear(GL_COLOR_BUFFER_BIT);
 
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity( );
+        glOrtho(0, WIN_WIDTH, 0, WIN_HEIGHT, -1, 1);
+
+        draw_rect(400, 300);
+
         // glMatrixMode(GL_PROJECTION);
         // glLoadIdentity();
         // glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
@@ -81,24 +97,24 @@ int main(int ac, char *av[])
         // glLoadIdentity();
         // glRotatef((float) glfwGetTime() * 50.f, 0.f, 0.f, 1.f);
 
-		//
+        //
         int level_index;
         if (ac > 1)
             level_index = ac > 1 ? ft_atoi(av[1]) : 0;
-		draw_level(&levels[level_index]);
-		if (!updateBall(&ball))
-			break ;
-		drawBall(&ball);
+        draw_level(&levels[level_index]);
+        if (!updateBall(&ball))
+            break ;
+        drawBall(&ball);
 
         //draw triangle
-		/*glBegin(GL_TRIANGLES);
-        glColor3f(1.f, 0.f, 0.f);
-        glVertex3f(-0.6f, -0.4f, 0.f);
-        glColor3f(0.f, 1.f, 0.f);
-        glVertex3f(0.6f, -0.4f, 0.f);
-        glColor3f(0.f, 0.f, 1.f);
-        glVertex3f(0.f, 0.6f, 0.f);
-        glEnd();*/
+		// glBegin(GL_TRIANGLES);
+  //       glColor3f(1.f, 0.f, 0.f);
+  //       glVertex3f(-0.6f, -0.4f, 0.f);
+  //       glColor3f(0.f, 1.f, 0.f);
+  //       glVertex3f(0.6f, -0.4f, 0.f);
+  //       glColor3f(0.f, 0.f, 1.f);
+  //       glVertex3f(0.f, 0.6f, 0.f);
+  //       glEnd();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

@@ -1,10 +1,13 @@
 #ifndef ATARI_H
 # define ATARI_H
 
+# define GLFW_INCLUDE_GLU
+
 # include "libft.h"
 # include <glfw3.h>
 # include <stdlib.h>
 # include <stdio.h>
+
 
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	600
