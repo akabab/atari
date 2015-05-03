@@ -1,5 +1,7 @@
 #include "atari.h"
 
+#include <stdio.h>
+
 static int				check_pad(t_ball *ball, t_pad *pad)
 {
 	float			xb;
@@ -10,14 +12,24 @@ static int				check_pad(t_ball *ball, t_pad *pad)
 	if (xb >= P(x0) && xb <= P(x1) &&
 			yb >= P(y0) && yb <= P(y1))
 	{
-		if (xb < (P(x1) - P(x0)) / 4)
-			ball->speedx = -0.06;
-		else if (xb < ((P(x1) - P(x0)) * 2) / 4)
-			ball->speedx = -0.018;
-		else if (xb < ((P(x1) - P(x0)) * 3) / 4)
-			ball->speedx = 0.018;
-		else if (xb < (P(x1) - P(x0)))
-			ball->speedx = 0.06;;
+		ball->speedy = -ball->speedy;
+		ball->y += ball->r;
+		return (1);
+	}
+	xb = ball->x + ((SQRT_2 / 2) * ball->r);
+	yb = ball->y - ((SQRT_2 / 2) * ball->r);
+	if (xb >= P(x0) && xb <= P(x1) &&
+			yb >= P(y0) && yb <= P(y1))
+	{
+		ball->speedy = -ball->speedy;
+		ball->y += ball->r;
+		return (1);
+	}
+	xb = ball->x - ((SQRT_2 / 2) * ball->r);
+	yb = ball->y - ((SQRT_2 / 2) * ball->r);
+	if (xb >= P(x0) && xb <= P(x1) &&
+			yb >= P(y0) && yb <= P(y1))
+	{
 		ball->speedy = -ball->speedy;
 		ball->y += ball->r;
 		return (1);
@@ -53,9 +65,9 @@ t_pad				*init_pad(void)
 	if (!pad)
 		exit(EXIT_FAILURE);
 	pad->x0 = PAD_INIT_X - PAD_INIT_WIDTH / 2;
-	pad->y1 = PAD_INIT_Y - PAD_INIT_HEIGHT / 2;
+	pad->y0 = PAD_INIT_Y - PAD_INIT_HEIGHT / 2;
 	pad->x1 = PAD_INIT_X + PAD_INIT_WIDTH / 2;
-	pad->y0 = PAD_INIT_Y + PAD_INIT_HEIGHT / 2;
+	pad->y1 = PAD_INIT_Y + PAD_INIT_HEIGHT / 2;
 	pad->scale = PAD_INIT_SCALE;
 	pad->speed = PAD_INIT_SPEED;
 	return (pad);
