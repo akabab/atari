@@ -1,19 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   atari.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/05/03 22:10:25 by tdieumeg          #+#    #+#             */
-/*   Updated: 2015/05/03 22:21:00 by tdieumeg         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef ATARI_H
 # define ATARI_H
-
-// # define GLFW_INCLUDE_GLU
 
 # include <glfw3.h>
 # include <GLUT/glut.h>
@@ -29,98 +15,76 @@
 # define INVINCIBLE_MODE	0
 # define WIN_RESIZABLE		0
 
-# define SQRT_2			1.414213
-# define PI				3.141592
+# define SQRT_2				1.414213
+# define PI					3.141592
 
-# define WIN_WIDTH		600
-# define WIN_HEIGHT		600
+# define WIN_WIDTH			600
+# define WIN_HEIGHT			600
 
-# define LEVEL_WIDTH	15
-# define LEVEL_HEIGHT	5
-# define LEVEL_MARGIN	0.05f
-# define TOP_MARGIN		0.13f
+# define LEVEL_WIDTH		15
+# define LEVEL_HEIGHT		5
+# define LEVEL_MARGIN		0.05f
+# define TOP_MARGIN			0.13f
 
-# define BRICK_WIDTH	((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH)
-# define BRICK_HEIGHT	((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT)
-# define BRICK_BORDER	0.008f
+# define BRICK_WIDTH		((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH)
+# define BRICK_HEIGHT		((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT)
+# define BRICK_BORDER		0.008f
 
-# define NO_BRICK_CHAR	'_'
-# define STATIC_BRICK	9
+# define NO_BRICK_CHAR		'_'
+# define STATIC_BRICK		9
 
-# define N_LEVELS		3
-# define LEVEL_PATH		"./levels/level_"
+# define N_LEVELS			3
+# define LEVEL_PATH			"./levels/level_"
 
-# define INIT_SCORE		0
-# define INIT_LIVES		3
+# define INIT_SCORE			0
+# define INIT_LIVES			3
 
-# define B(X)			brick->X
-# define P(X)			pad->X
+# define B(X)				brick->X
+# define P(X)				pad->X
 
 /*
 **		COLOR
-**						|R|, |G|, |B|
+**							|R|, |G|, |B|
 */
-# define PINK			217,  36, 105
-# define PURPLE			157, 124, 255
-# define CYAN			117, 176, 195
-# define YELLOW			227, 219, 115
-# define ORANGE			228, 126,   0
-# define GREEN			177, 227,  54
-# define BROWN			115, 111,  79
-# define DARK_GREY		 44,  44,  39
-# define LIGHT_GREY		142, 143, 137
-# define BLACK			  0,   0,   0
-# define WHITE			255, 255, 255
+# define PINK				217,  36, 105
+# define PURPLE				157, 124, 255
+# define CYAN				117, 176, 195
+# define YELLOW				227, 219, 115
+# define ORANGE				228, 126,   0
+# define GREEN				177, 227,  54
+# define BROWN				115, 111,  79
+# define DARK_GREY			 44,  44,  39
+# define LIGHT_GREY			142, 143, 137
+# define BLACK				  0,   0,   0
+# define WHITE				255, 255, 255
 
-# define TEXT_FONT		GLUT_BITMAP_9_BY_15
+# define TEXT_FONT			GLUT_BITMAP_9_BY_15
 
 /*
-**		CORNERS
-**
-**    NW      N     NE
-**            1
-**            |
-**    W -1----|----1 E
-**            |
-**           -1
-**    SW      S     SE
-**
-**                        X ,  Y
+**		COORDS
 */
-# define N_X			 0.f
-# define N_Y			       1.f
-# define S_X			 0.f
-# define S_Y			      -1.f
-# define W_X			-1.f
-# define W_Y			       0.f
-# define E_X			 1.f
-# define E_Y			       0.f
+# define NW					-1.f,  1.f
+# define NE					 1.f,  1.f
+# define SE					 1.f, -1.f
+# define SW					-1.f, -1.f
 
-# define NW				-1.f,  1.f
-# define NE				 1.f,  1.f
-# define SE				 1.f, -1.f
-# define SW				-1.f, -1.f
+# define N_X				0.f
+# define N_Y				1.f
+# define S_X				0.f
+# define S_Y				-1.f
+# define W_X				-1.f
+# define W_Y				0.f
+# define E_X				1.f
+# define E_Y				0.f
 
-# define UI_LIFE_X		(-1.f + 0.1f)
-# define UI_LIFE_Y		(1.f - 0.1f)
-# define UI_LIFE_MARGIN	0.1f
+# define UI_LIFE_X			(-1.f + 0.1f)
+# define UI_LIFE_Y			(1.f - 0.1f)
+# define UI_LIFE_MARGIN		0.1f
 
-# define UI_SCORE_X		(1.f - 0.4f)
-# define UI_SCORE_Y		(1.f - 0.132f)
+# define UI_SCORE_X			(1.f - 0.4f)
+# define UI_SCORE_Y			(1.f - 0.132f)
 
-# define BALL_OUT_LIMIT	(-1.0f)
-
-enum
-{
-	NO_SEGM = 1 << 0,
-	SEGM_1 = 1 << 1,
-	SEGM_2 = 1 << 2,
-	SEGM_3 = 1 << 3,
-	SEGM_4 = 1 << 4,
-	SEGM_5 = 1 << 5,
-	SEGM_6 = 1 << 6,
-	SEGM_7 = 1 << 7
-};
+# define BALL_OUT_LIMIT		(-1.0f)
 
 typedef struct		s_brick
 {
@@ -131,11 +95,11 @@ typedef struct		s_brick
 	int				val;
 }					t_brick;
 
-# define BALL_ORIGIN_X 0.0f
-# define BALL_ORIGIN_Y 0.0f
-# define BALL_RADIUS 0.03f
-# define BALL_ORIGIN_SPEEDX 0.018
-# define BALL_ORIGIN_SPEEDY 0.025
+# define BALL_ORIGIN_X		0.0f
+# define BALL_ORIGIN_Y		0.0f
+# define BALL_RADIUS		0.03f
+# define BALL_ORIGIN_SPEEDX	0.018
+# define BALL_ORIGIN_SPEEDY	0.025
 
 typedef struct		s_ball
 {
@@ -172,13 +136,13 @@ typedef struct		s_level
 	t_ball			*ball;
 }					t_level;
 
-typedef struct			s_keys
+typedef struct		s_keys
 {
-	t_bool	up;
-	t_bool	down;
-	t_bool	right;
-	t_bool	left;
-}						t_keys;
+	t_bool			up;
+	t_bool			down;
+	t_bool			right;
+	t_bool			left;
+}					t_keys;
 
 typedef struct		s_game
 {

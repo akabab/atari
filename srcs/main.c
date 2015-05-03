@@ -62,9 +62,7 @@ int				main(int ac, char *av[])
 		handle_levels(game);
 		reset_viewport(window);
 		glMatrixMode(GL_MODELVIEW);
-		/* Render here */
 		render(game);
-		//Check collision
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
