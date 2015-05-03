@@ -7,9 +7,9 @@ static void		push_level_brick(t_level *level, int x, int y, int val)
 
 	new_brick = (t_brick *)ft_memalloc(sizeof(t_brick));
 	new_brick->x0 = -1.f + LEVEL_MARGIN + (float)x * BRICK_WIDTH;
-	new_brick->y0 = 1.f - (LEVEL_MARGIN + (float)(y + 1) * BRICK_HEIGHT);
+	new_brick->y0 = 1.f  - TOP_MARGIN - (LEVEL_MARGIN + (float)(y + 1) * BRICK_HEIGHT);
 	new_brick->x1 =  -1.f + LEVEL_MARGIN + (float)(x + 1) * BRICK_WIDTH;
-	new_brick->y1 = 1.f - (LEVEL_MARGIN + (float)y * BRICK_HEIGHT);
+	new_brick->y1 = 1.f  - TOP_MARGIN - (LEVEL_MARGIN + (float)y * BRICK_HEIGHT);
 	new_brick->val = val;
 	list_push_back(&level->brick_list, new_brick);
 }

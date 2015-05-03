@@ -15,7 +15,8 @@ static void			draw_brick(t_brick *brick)
 	int		val;
 
 	glColor3ub(BLACK);
-	glRectf(brick->x0, brick->y1, brick->x1, brick->y0);
+	glRectf(brick->x0, brick->y1,
+			brick->x1, brick->y0);
 	val = brick->val;
 	if (val == 1) //USE MACROS
 		glColor3ub(GREEN);
@@ -66,74 +67,6 @@ static void			draw_pad(t_pad *pad)
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }
 
-static void			draw_circle(float pos_x, float pos_y)
-{
-	float			x;
-	float			y;
-	int				i;
-	float			radius;
-
-	radius = 0.02f;
-	y = -radius;
-	while (y <= radius)
-	{
-		x = -radius;
-		while (x <= radius)
-		{
-			if ((x * x + y * y) <= (radius * radius))
-			{
-				glPointSize(1);
-				glBegin(GL_POINTS);
-				glColor3ub(PINK);
-				glVertex2f(pos_x + x, pos_y + y);
-				glEnd();
-			}
-			x += 0.0025f;
-		}
-		y += 0.0025f;
-	}
-}
-
-void	draw_text(float x, float y, char *str, void *font)
-{
-	int		len;
-	int		i;
-
-	glRasterPos2f(x,y);
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len)
-	{
-		glutBitmapCharacter(font, str[i]);
-		i++;
-	}
-}
-
-void				draw_score(int score)
-{
-	char	*score_str;
-
-}
-
-void				draw_lives(int n_lives)
-{
-	int		i;
-
-	i = 0;
-	while (i < n_lives)
-	{
-		draw_circle(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.0f, UI_LIFE_Y);
-		draw_circle(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.04f, UI_LIFE_Y);
-		glBegin(GL_TRIANGLES);
-		glColor3ub(PINK);
-		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.02f, UI_LIFE_Y + -0.06f);
-		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.061f, UI_LIFE_Y + 0.0f);
-		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + -0.022f, UI_LIFE_Y + 0.0f);
-		glEnd();
-		i++;
-	}
-}
-
 void				draw_level(t_level *level)
 {
 	t_list_node		*cursor;
@@ -153,7 +86,6 @@ void				draw_level(t_level *level)
 	draw_pad(level->pad);
 	draw_level_border();
 	draw_lives(level->lives);
-	glColor3ub(WHITE);
-	draw_text(0.f, 0.f, "Heloo", TEXT_FONT);
+	draw_score(level->score);
 }
 

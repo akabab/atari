@@ -34,6 +34,7 @@ SRCS			= main.c \
 				collision.c \
 				rebound.c \
 				draw.c \
+				draw_ui.c \
 				level.c \
 				ball.c \
 				pad.c \
