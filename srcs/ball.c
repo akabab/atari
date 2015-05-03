@@ -24,6 +24,11 @@ void				handle_bounds(t_ball *ball)
 		ball->speedy = -ball->speedy;
 		ball->y = 1.0f - LEVEL_MARGIN - ball->r;
 	}
+	if (INVINCIBLE_MODE && (ball->y - ball->r) <= -1.0f)
+	{
+		ball->speedy = -ball->speedy;
+		ball->y = -1.0f + LEVEL_MARGIN + ball->r;
+	}
 }
 
 static void			reset_ball(t_ball *ball)
@@ -48,12 +53,12 @@ void				update_ball(t_ball *ball, t_list_node *bricks)
 		ball->x += (ball->speedx) / 10.0f;
 		ball->y += (ball->speedy) / 10.0f;
 		handle_bounds(ball);
-		if (is_ball_outside(ball))
+		if (!INVINCIBLE_MODE && is_ball_outside(ball))
 		{
 			game->cur_level->lives--;
 			reset_ball(ball);
 		}
-		check_collisions(ball, bricks); //mv
+		check_collisions(ball, bricks);
 		i++;
 	}
 }
