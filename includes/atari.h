@@ -25,6 +25,7 @@
 # define LEVEL_WIDTH	15
 # define LEVEL_HEIGHT	5
 # define LEVEL_MARGIN	0.05f
+# define TOP_MARGIN		0.13f
 
 # define BRICK_WIDTH	((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH)
 # define BRICK_HEIGHT	((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT)
@@ -88,6 +89,9 @@
 # define UI_LIFE_X		(-1.f + 0.1f)
 # define UI_LIFE_Y		(1.f - 0.1f)
 # define UI_LIFE_MARGIN	0.1f
+
+# define UI_SCORE_X		(1.f - 0.4f)
+# define UI_SCORE_Y		(1.f - 0.132f)
 
 # define BALL_OUT_LIMIT	(-1.0f)
 
@@ -230,5 +234,12 @@ void				handle_errors(const char __func[], char *err, t_bool is_critic);
 */
 void				load_level(t_game *game, int level_index);
 void				handle_levels(t_game *game);
+
+/*
+**		draw_ui.c
+*/
+void				draw_text(float x, float y, char *str, void *font);
+void				draw_lives(int n_lives);
+void				draw_score(int score);
 
 #endif

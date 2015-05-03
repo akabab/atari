@@ -2,8 +2,16 @@
 
 int					rebound(t_ball *ball, t_brick *brick, int side)
 {
-	if (brick->val != 9)
+	t_game		*game;
+	t_level		*cur_level;
+
+	game = get_game();
+	cur_level = game->cur_level;
+	if (brick->val != STATIC_BRICK)
+	{
 		brick->val--;
+		cur_level->score++;
+	}
 	if (side == 1 || side == 3)
 		ball->speedy = -ball->speedy;
 	if (side == 2 || side == 4)
