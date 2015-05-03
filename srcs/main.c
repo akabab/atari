@@ -15,24 +15,41 @@ void	reset_viewport(GLFWwindow *window)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
+t_game	*init_game(void)
+{
+	t_game	*game;
+
+	game = (t_game *)ft_memalloc(sizeof(t_game));
+	if (!game)
+		exit(EXIT_FAILURE);
+	load_levels(game->levels);
+	return (game);
+}
+
+void	render(GLFWwindow *window, t_game *game)
+{
+	draw_level(game->levels[game->cur_level_index]);
+}
+
 int		main(int ac, char *av[])
 {
 	GLFWwindow	*window;
-	t_level		levels[N_LEVELS];
-	t_ball		ball;
-	int			level_index;
+	t_game		*game;
 
-	level_index = ac > 1 ? ft_atoi(av[1]) : 0;
 	init_glfw(&window);
-	load_levels(levels);
-	init_ball(&ball);
+	game = init_game();
+	game->cur_level_index = ac > 1 ? ft_atoi(av[1]) : 0; //
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		reset_viewport(window);
 		glMatrixMode(GL_MODELVIEW);
 		/* Render here */
-		renderer(window, levels, &ball, level_index);
+		render(window, game);
+
+		//Check collision
+
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
 		/* Poll for and process events */

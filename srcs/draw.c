@@ -1,6 +1,6 @@
 #include "atari.h"
 
-static void		draw_level_border(void)
+static void			draw_level_border(void)
 {
 	glColor3ub(PURPLE);
 	glRectf(NW, NE - LEVEL_MARGIN); //top
@@ -8,7 +8,7 @@ static void		draw_level_border(void)
 	glRectf(1.f - LEVEL_MARGIN, 1.f, SE); //right
 }
 
-void			draw_brick(t_brick *brick)
+static void			draw_brick(t_brick *brick)
 {
 	int		val;
 
@@ -29,7 +29,27 @@ void			draw_brick(t_brick *brick)
 			brick->x1 - BRICK_BORDER, brick->y0 + BRICK_BORDER);
 }
 
-void			draw_level(t_level *level)
+static void			draw_ball(t_ball *ball)
+{
+	float			x;
+	float			y;
+	int				i;
+
+	glBegin(GL_POLYGON);
+	glColor3f(YELLOW);
+	i = 0;
+	while (i < 20)
+	{
+		x = ball->x + ball->r * (cos(i * 2.0f * M_PI / 20.0f));
+		y = ball->y + ball->r * (sin(i * 2.0f * M_PI / 20.0f));
+		glVertex2f(x, y);
+		i++;
+	}
+	glEnd();
+}
+
+
+void				draw_level(t_level *level)
 {
 	t_list_node		*cursor;
 	t_brick			*cur_brick;
@@ -43,5 +63,7 @@ void			draw_level(t_level *level)
 			draw_brick(cur_brick);
 		cursor = cursor->next;
 	}
+	update_ball(level->ball);
+	draw_ball(level->ball);
 }
 

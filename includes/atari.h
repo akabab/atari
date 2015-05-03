@@ -11,6 +11,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <math.h>
 
 # define WIN_WIDTH	600
 # define WIN_HEIGHT	600
@@ -28,6 +29,9 @@
 
 # define N_LEVELS		3
 # define LEVEL_PATH		"./levels/level_"
+
+# define INIT_SCORE		0
+# define INIT_LIVES		3
 
 /*
 **		COLOR
@@ -81,18 +85,39 @@ typedef struct		s_brick
 	int				val;
 }					t_brick;
 
+typedef struct		s_pad
+{
+	float			x0;
+	float			y0;
+	float			x1;
+	float			y1;
+	float			scale_factor;
+}					t_pad;
+
 typedef struct		s_level
 {
+	int				score;
+	int				lives;
 	t_list_node		*brick_list;
+	t_pad			*pad;
+	t_ball			*ball;
 }					t_level;
+
+typedef struct		s_game
+{
+	t_level			*levels[N_LEVELS];
+	t_level			*cur_level;
+	int				cur_level_index;
+}					t_game;
+
 
 void				reset_viewport(GLFWwindow *window);
 
 /*
 **		glfw_handler.c
 */
-int					glfw_init(GLFWwindow **window);
-int					glfw_clean(GLFWwindow *window);
+int					init_glfw(GLFWwindow **window);
+int					clean_glfw(GLFWwindow *window);
 
 /*
 **		draw.c
@@ -102,7 +127,7 @@ void				draw_level(t_level *level);
 /*
 **		level_loader.c
 */
-void				load_levels(t_level levels[]);
+void				load_levels(t_level *levels[]);
 
 int					renderer(GLFWwindow *window, t_level *levels, t_ball *ball, int level_index);
 

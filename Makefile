@@ -6,7 +6,7 @@
 #    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/03 13:33:34 by ycribier         ###   ########.fr        #
+#    Updated: 2015/05/03 15:08:42 by ycribier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ SRCS			= main.c \
 				  glfw_handler.c \
 				  level_loader.c \
 				  ball.c \
-				  renderer.c \
 				  draw.c \
 				  err.c
 

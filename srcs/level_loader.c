@@ -22,7 +22,6 @@ static void		parse_level(int fd, t_level *level)
 
 	y = 0;
 	line = NULL;
-	level->brick_list = NULL; // mv -> init_level
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (y >= LEVEL_HEIGHT)
@@ -44,7 +43,22 @@ static void		parse_level(int fd, t_level *level)
 		handle_errors(__func__, "wrong height!", TRUE);
 }
 
-void			load_levels(t_level levels[])
+static t_level	*init_level(void)
+{
+	t_level	*level;
+
+	level = (t_level *)ft_memalloc(sizeof(t_level));
+	if (!level)
+		exit(EXIT_FAILURE);
+	level->score = INIT_SCORE;
+	level->lives = INIT_LIVES;
+	level->brick_list = NULL;
+	level->ball = init_ball();
+	// level->pad = init_pad();
+	return (level);
+}
+
+void			load_levels(t_level *levels[])
 {
 	int		fd[N_LEVELS];
 	int		i;
@@ -59,7 +73,8 @@ void			load_levels(t_level levels[])
 		ft_printf("loading %s ..\n", path); //
 		if ((fd[i] = open(path, O_RDONLY)) == -1)
 			exit(EXIT_FAILURE);
-		parse_level(fd[i], &levels[i]);
+		levels[i] = init_level();
+		parse_level(fd[i], levels[i]);
 		ft_strdel(&path);
 		ft_strdel(&level_index);
 		i++;
