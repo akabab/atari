@@ -7,7 +7,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <math.h> //! MUST BE REMOVED
 
 # include "libft.h"
 # include "list.h"
@@ -38,6 +37,7 @@
 # define INIT_LIVES		3
 
 # define B(X)			brick->X
+# define P(X)			pad->X
 /*
 **		COLOR
 **						|R|, |G|, |B|
@@ -213,7 +213,7 @@ t_keys				*init_keys(void);
 /*
 **		pad.c
 */
-void				update_pad(t_pad *pad);
+void				update_pad(t_pad *pad, t_ball *ball);
 t_pad				*init_pad(void);
 
 /*

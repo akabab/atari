@@ -1,6 +1,31 @@
 #include "atari.h"
 
-void					update_pad(t_pad *pad)
+static int				check_pad(t_ball *ball, t_pad *pad)
+{
+	float			xb;
+	float			yb;
+
+	xb = ball->x;
+	yb = ball->y - ball->r;
+	if (xb >= P(x0) && xb <= P(x1) &&
+			yb >= P(y0) && yb <= P(y1))
+	{
+		if (xb < (P(x1) - P(x0)) / 4)
+			ball->speedx = -0.06;
+		else if (xb < ((P(x1) - P(x0)) * 2) / 4)
+			ball->speedx = -0.018;
+		else if (xb < ((P(x1) - P(x0)) * 3) / 4)
+			ball->speedx = 0.018;
+		else if (xb < (P(x1) - P(x0)))
+			ball->speedx = 0.06;;
+		ball->speedy = -ball->speedy;
+		ball->y += ball->r;
+		return (1);
+	}
+	return (0);
+}
+
+void					update_pad(t_pad *pad, t_ball *ball)
 {
 	t_game		*game;
 	t_keys		*keys;
@@ -17,6 +42,7 @@ void					update_pad(t_pad *pad)
 		pad->x0 -= pad->speed;
 		pad->x1 -= pad->speed;
 	}
+	check_pad(ball, pad);
 }
 
 t_pad				*init_pad(void)
