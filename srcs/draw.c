@@ -1,5 +1,7 @@
 #include "atari.h"
 
+#include <stdio.h>
+
 static void			draw_level_border(void)
 {
 	glColor3ub(PURPLE);
@@ -35,17 +37,24 @@ static void			draw_ball(t_ball *ball)
 	float			y;
 	int				i;
 
-	glBegin(GL_POLYGON);
-	glColor3ub(CYAN);
-	i = 0;
-	while (i < 20)
+	y = -ball->r;
+	while (y <= ball->r)
 	{
-		x = ball->x + ball->r * (cos(i * 2.0f * PI / 20.0f));
-		y = ball->y + ball->r * (sin(i * 2.0f * PI / 20.0f));
-		glVertex2f(x, y);
-		i++;
+		x = -ball->r;
+		while (x <= ball->r)
+		{
+			if ((x * x + y * y) <= (ball->r * ball->r))
+			{
+				glPointSize(1);
+				glBegin(GL_POINTS);
+				glColor3f(0.0, 1.0, 1.0);
+				glVertex2f(ball->x + x, ball->y + y);
+				glEnd();
+			}
+			x += 0.0025f;
+		}
+		y += 0.0025f;
 	}
-	glEnd();
 }
 
 static void			draw_pad(t_pad *pad)

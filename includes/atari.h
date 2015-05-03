@@ -102,8 +102,8 @@ typedef struct		s_brick
 # define BALL_ORIGIN_X 0.0f
 # define BALL_ORIGIN_Y 0.0f
 # define BALL_RADIUS 0.03f
-# define BALL_ORIGIN_SPEEDX 0.037
-# define BALL_ORIGIN_SPEEDY 0.05
+# define BALL_ORIGIN_SPEEDX 0.018
+# define BALL_ORIGIN_SPEEDY 0.025
 
 typedef struct		s_ball
 {
