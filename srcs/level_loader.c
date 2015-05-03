@@ -1,6 +1,7 @@
+#include <fcntl.h>
+#include <glfw3.h>
 #include "atari.h"
 #include "libft.h"
-#include <fcntl.h>
 
 void	display_level(t_level *level)
 {
@@ -21,42 +22,55 @@ void	display_level(t_level *level)
 	}
 }
 
+void	draw_level_border(void)
+{
+	glColor3ub(115, 111, 79); //brown
+	//top
+	glRectf(-1.f, 1.f, 1.f, 1.f - LEVEL_MARGIN);
+	//left
+	glRectf(-1.f, 1.f, -1.f + LEVEL_MARGIN, -1.f);
+	//right
+	glRectf(1.f - LEVEL_MARGIN, 1.f, 1.f, -1.f);
+}
+
 void	draw_level(t_level *level)
 {
-	int i;
-	int j;
+	t_list_node		*cursor;
+	t_brick			*cur_brick;
 
-	float block_w = 2.0f / (LEVEL_WIDTH + 0.01f);
-	float block_h = 0.5f / (LEVEL_HEIGHT + 0.01f);
 
-	j = 0;
-	while (j < LEVEL_HEIGHT)
+	float block_margin = 0.01f;
+	draw_level_border();
+	cursor = level->brick_list;
+	while (cursor)
 	{
-		i = 0;
-		while (i < LEVEL_WIDTH)
+		cur_brick = (t_brick *)cursor->value;
+
+		//border color
+		// glColor3ub(44, 44, 39); //dark_grey
+		glColor3ub(0, 0, 0);
+		glRectf(cur_brick->x0, cur_brick->y0, cur_brick->x1, cur_brick->y1);
+		switch (cur_brick->val)
 		{
-			if (level->blocks[j][i])
-			{
-				int val = level->blocks[j][i];
-				switch (val)
-				{
-					case 1:
-						glColor3f(0.0f, 0.0f, 0.8f);
-						break;
-					case 3:
-						glColor3f(0.0f, 0.8f, 0.0f);
-						break;
-					case 9:
-						glColor3f(0.5f, 0.0f, 0.0f);
-						break;
-				}
-				glRectf(-1.f + (float)i * block_w, 1.f - (float)j * block_h,
-						-1.f + (float)(i+1) * block_w, 1.f - (float)(j+1) * block_h);
-			}
-			i++;
+			case 1:
+				glColor3ub(227, 219, 115); //yellow
+				break;
+			case 2:
+				glColor3ub(228, 126, 0); //orange
+				break;
+			case 3:
+				glColor3ub(217, 36, 105); //pink
+				break;
+			case 9:
+				glColor3ub(142, 143, 137); //grey
+				break;
 		}
-		j++;
+		glRectf(cur_brick->x0 + block_margin, cur_brick->y0 - block_margin,
+				cur_brick->x1 - block_margin, cur_brick->y1 + block_margin);
+
+		cursor = cursor->next;
 	}
+
 }
 
 void	parse_level(int fd, t_level *level)
@@ -65,11 +79,19 @@ void	parse_level(int fd, t_level *level)
 	int		i;
 	int		j;
 
-	i = 0;
+	//init level
+	level->brick_list = NULL;
+
+	float block_w = ((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH);
+	float block_h = ((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT);
+
+	printf("%f %f\n", block_w, block_h);
+
+	j = 0;
 	line = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (i >= LEVEL_HEIGHT)
+		if (j >= LEVEL_HEIGHT)
 		{
 			ft_printf("Err: %s: wrong height\n", __func__);
 			exit(EXIT_FAILURE);
@@ -81,24 +103,29 @@ void	parse_level(int fd, t_level *level)
 		}
 
 		//set_level_blocks
-		j = 0;
-		while (line[j] != '\0')
+		i = 0;
+		while (line[i] != '\0')
 		{
 			int val;
-			if (line[j] == NO_BLOCK_CHAR)
-				val = 0;
-			else
-				val = line[j] - '0';
-			level->blocks[i][j] = val;
-			j++;
+			if (line[i] != NO_BLOCK_CHAR)
+			{
+				t_brick *new_brick = (t_brick *)ft_memalloc(sizeof (t_brick));
+				new_brick->x0 = -1.f + LEVEL_MARGIN + (float)i * block_w;
+				new_brick->y0 = 1.f - (LEVEL_MARGIN + (float)j * block_h);
+				new_brick->x1 =  -1.f + LEVEL_MARGIN + (float)(i+1) * block_w;
+				new_brick->y1 = 1.f - (LEVEL_MARGIN + (float)(j+1) * block_h);
+				new_brick->val = line[i] - '0';
+				list_push_back(&level->brick_list, new_brick);
+			}
+			i++;
 		}
 		//
 
 		if (line)
 			ft_strdel(&line);
-		i++;
+		j++;
 	}
-	if (i != LEVEL_HEIGHT)
+	if (j != LEVEL_HEIGHT)
 	{
 		ft_printf("Err: %s: wrong height\n", __func__);
 		exit(EXIT_FAILURE);
