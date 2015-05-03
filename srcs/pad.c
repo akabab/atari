@@ -7,12 +7,12 @@ void					update_pad(t_pad *pad)
 
 	game = get_game();
 	keys = game->keys;
-	if (keys->right == TRUE)
+	if (keys->right == TRUE && (pad->x1 + pad->speed < E_X - LEVEL_MARGIN))
 	{
 		pad->x0 += pad->speed;
 		pad->x1 += pad->speed;
 	}
-	if (keys->left == TRUE)
+	if (keys->left == TRUE && (pad->x0 - pad->speed > W_X + LEVEL_MARGIN))
 	{
 		pad->x0 -= pad->speed;
 		pad->x1 -= pad->speed;
