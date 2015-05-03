@@ -157,6 +157,7 @@ typedef struct		s_game
 */
 t_game				*get_game(void);
 void				reset_viewport(GLFWwindow *window);
+void				free_all(void);
 
 /*
 **		ball.c

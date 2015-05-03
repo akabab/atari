@@ -18,14 +18,23 @@ void			reset_viewport(GLFWwindow *window)
 void			free_all(void)
 {
 	t_game		*game;
+	t_level		*cur_level;
+	int			i;
 
 	game = get_game();
 	if (!game)
 		exit(EXIT_FAILURE);
-	//free game->levels[]
-	//	- free(level->pad);
-	//	- free(level->ball);
-	//	- list_clear_destroy(level->brick_list);
+	i = 0;
+	while (i < N_LEVELS)
+	{
+		cur_level = game->levels[i];
+		list_clear_destroy(&cur_level->brick_list);
+		free(cur_level->pad);
+		free(cur_level->ball);
+		free(cur_level);
+		i++;
+	}
+	free(game->keys);
 	free(game);
 }
 
@@ -54,8 +63,8 @@ int				main(int ac, char *av[])
 	GLFWwindow	*window;
 	t_game		*game;
 
-	init_glfw(&window);
 	game = get_game();
+	init_glfw(&window);
 	load_level(game, ac > 1 ? ft_atoi(av[1]) : 0);
 	while (!glfwWindowShouldClose(window))
 	{
@@ -67,5 +76,6 @@ int				main(int ac, char *av[])
 		glfwPollEvents();
 	}
 	clean_glfw(window);
+	free_all();
 	return (0);
 }

@@ -75,7 +75,7 @@ void			load_levels(t_level *levels[])
 		path = ft_strjoin(LEVEL_PATH, level_index);
 		ft_printf("loading %s ..\n", path);
 		if ((fd[i] = open(path, O_RDONLY)) == -1)
-			exit(EXIT_FAILURE);
+			handle_errors(__func__, "level not found!", TRUE);
 		levels[i] = init_level();
 		parse_level(fd[i], levels[i]);
 		ft_strdel(&path);
