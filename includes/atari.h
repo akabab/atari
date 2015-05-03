@@ -7,13 +7,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <math.h>
 
 # include "libft.h"
 # include "list.h"
 
-# define WIN_WIDTH	600
-# define WIN_HEIGHT	600
+#define SQRT_2			1.414213
+#define PI				3.141592
+
+# define WIN_WIDTH		600
+# define WIN_HEIGHT		600
 
 # define LEVEL_WIDTH	15
 # define LEVEL_HEIGHT	5
@@ -100,18 +102,16 @@ typedef struct		s_brick
 # define BALL_ORIGIN_X 0.0f
 # define BALL_ORIGIN_Y 0.0f
 # define BALL_RADIUS 0.03f
-# define SPEED_STEP 0.01f
-# define SPEED_MODIFIER 3
-# define BALL_ORIGIN_SPEED (SPEED_MODIFIER * SPEED_STEP)
-# define BALL_MVT_ANGLE (5 * M_PI / 6)
+# define BALL_ORIGIN_SPEEDX 0.037
+# define BALL_ORIGIN_SPEEDY 0.05
 
 typedef struct		s_ball
 {
 	float			x;
 	float			y;
 	float			r;
-	float			speed;
-	float			rad;
+	float			speedx;
+	float			speedy;
 }					t_ball;
 
 # define PAD_INIT_X			0.f
@@ -201,5 +201,8 @@ t_pad				*init_pad(void);
 */
 void				handle_errors(const char __func[], char *err, t_bool is_critic);
 
-
+/*
+**		math.c
+*/
+double				two_pi_modulo(double rad);
 #endif

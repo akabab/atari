@@ -5,7 +5,7 @@ static int		check_top_right(t_ball *ball, t_brick *brick)
 	float			xb;
 	float			yb;
 
-	if (ball->rad >= 0 && ball->rad <= (M_PI / 2))
+	if (ball->speedx >= 0 && ball->speedy >=0)
 	{
 		xb = ball->x;
 		yb = ball->y + ball->r;
@@ -13,6 +13,7 @@ static int		check_top_right(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 1);
+			ball->y -= ball->r;
 			return (1);
 		}
 		xb = ball->x + ball->r;
@@ -21,19 +22,24 @@ static int		check_top_right(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 2);
+			ball->x -= ball->r;
 			return (1);
 		}
-		xb = ball->x + ((sqrt(2) / 2) * ball->r);
-		yb = ball->y + ((sqrt(2) / 2) * ball->r);
+		xb = ball->x + ((SQRT_2 / 2) * ball->r);
+		yb = ball->y + ((SQRT_2 / 2) * ball->r);
 		if (xb >= B(x0) && xb <= B(x1) &&
 				yb >= B(y0) && yb <= B(y1))
 		{
-			if (xb - B(x0) > yb - B(y0))
+			if (xb - B(x0) >= yb - B(y0))
+			{
 				rebound(ball, brick, 1);
-			else if (xb - B(x0) < yb - B(y0))
-				rebound(ball, brick, 2);
+				ball->y -= ((SQRT_2 / 2) * ball->r);
+			}
 			else
-				rebound(ball, brick, 0);
+			{
+				rebound(ball, brick, 2);
+				ball->x -= ((SQRT_2 / 2) * ball->r);
+			}
 			return (1);
 		}
 	}
@@ -45,7 +51,7 @@ static int		check_top_left(t_ball *ball, t_brick *brick)
 	float			xb;
 	float			yb;
 
-	if (ball->rad > (M_PI / 2)  && ball->rad <= M_PI)
+	if (ball->speedx < 0  && ball->speedy >= 0)
 	{
 		xb = ball->x;
 		yb = ball->y + ball->r;
@@ -53,6 +59,7 @@ static int		check_top_left(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 1);
+			ball->y -= ball->r;
 			return (1);
 		}
 		xb = ball->x - ball->r;
@@ -61,19 +68,24 @@ static int		check_top_left(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 4);
+			ball->x += ball->r;
 			return (1);
 		}
-		xb = ball->x - ((sqrt(2) / 2) * ball->r);
-		yb = ball->y + ((sqrt(2) / 2) * ball->r);
+		xb = ball->x - ((SQRT_2 / 2) * ball->r);
+		yb = ball->y + ((SQRT_2 / 2) * ball->r);
 		if (xb >= B(x0) && xb <= B(x1) &&
 				yb >= B(y0) && yb <= B(y1))
 		{
-			if (B(x1) - xb > yb - B(y0))
+			if (B(x1) - xb >= yb - B(y0))
+			{
 				rebound(ball, brick, 1);
-			else if (B(x1) - xb < yb - B(y0))
-				rebound(ball, brick, 4);
+				ball->y -= (SQRT_2 / 2 * ball->r);
+			}
 			else
-				rebound(ball, brick, 0);
+			{
+				rebound(ball, brick, 4);
+				ball->x += (SQRT_2 / 2 * ball->r);
+			}
 			return (1);
 		}
 	}
@@ -85,7 +97,7 @@ static int		check_bottom_left(t_ball *ball, t_brick *brick)
 	float			xb;
 	float			yb;
 
-	if (ball->rad > (M_PI)  && ball->rad <= (3 * M_PI) / 2)
+	if (ball->speedx < 0 && ball->speedy < 0)
 	{
 		xb = ball->x;
 		yb = ball->y - ball->r;
@@ -93,6 +105,7 @@ static int		check_bottom_left(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 3);
+			ball->y += ball->r;
 			return (1);
 		}
 		xb = ball->x - ball->r;
@@ -101,19 +114,24 @@ static int		check_bottom_left(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 4);
+			ball->x += ball->r;
 			return (1);
 		}
-		xb = ball->x - ((sqrt(2) / 2) * ball->r);
-		yb = ball->y - ((sqrt(2) / 2) * ball->r);
+		xb = ball->x - ((SQRT_2 / 2) * ball->r);
+		yb = ball->y - ((SQRT_2 / 2) * ball->r);
 		if (xb >= B(x0) && xb <= B(x1) &&
 				yb >= B(y0) && yb <= B(y1))
 		{
-			if (B(x1) - xb > B(y1) - yb)
+			if (B(x1) - xb >= B(y1) - yb)
+			{
 				rebound(ball, brick, 3);
-			else if (B(x1) - xb < B(y1) - yb)
-				rebound(ball, brick, 4);
+				ball->y += (SQRT_2 / 2 * ball->r);
+			}
 			else
-				rebound(ball, brick, 0);
+			{
+				rebound(ball, brick, 4);
+				ball->x += (SQRT_2 / 2 * ball->r);
+			}
 			return (1);
 		}
 	}
@@ -125,7 +143,7 @@ static int		check_bottom_right(t_ball *ball, t_brick *brick)
 	float			xb;
 	float			yb;
 
-	if (ball->rad > (3 * M_PI) / 2 && ball->rad < (2 * M_PI))
+	if (ball->speedx >= 0 && ball->speedy < 0)
 	{
 		xb = ball->x;
 		yb = ball->y - ball->r;
@@ -133,6 +151,7 @@ static int		check_bottom_right(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 2);
+			ball->y -= ball->r;
 			return (1);
 		}
 		xb = ball->x + ball->r;
@@ -141,19 +160,24 @@ static int		check_bottom_right(t_ball *ball, t_brick *brick)
 				yb >= B(y0) && yb <= B(y1))
 		{
 			rebound(ball, brick, 3);
+			ball->x -= ball->r;
 			return (1);
 		}
-		xb = ball->x + ((sqrt(2) / 2) * ball->r);
-		yb = ball->y - ((sqrt(2) / 2) * ball->r);
+		xb = ball->x + ((SQRT_2 / 2) * ball->r);
+		yb = ball->y - ((SQRT_2 / 2) * ball->r);
 		if (xb >= B(x0) && xb <= B(x1) &&
 				yb >= B(y0) && yb <= B(y1))
 		{
-			if (xb - B(x0) > B(y1) - yb)
+			if (xb - B(x0) >= B(y1) - yb)
+			{
 				rebound(ball, brick, 2);
-			else if (xb - B(x0) < B(y1) - yb)
-				rebound(ball, brick, 3);
+				ball->x -= (SQRT_2 / 2 * ball->r);
+			}
 			else
-				rebound(ball, brick, 0);
+			{
+				rebound(ball, brick, 3);
+				ball->y += (SQRT_2 / 2 * ball->r);
+			}
 			return (1);
 		}
 	}
