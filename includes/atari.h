@@ -89,7 +89,7 @@ typedef struct		s_brick
 # define BALL_ORIGIN_Y 0.0f
 # define BALL_RADIUS 0.03f
 # define SPEED_STEP 0.01f
-# define SPEED_MODIFIER 5
+# define SPEED_MODIFIER 3
 # define BALL_ORIGIN_SPEED (SPEED_MODIFIER * SPEED_STEP)
 # define BALL_MVT_ANGLE (5 * M_PI / 6)
 
