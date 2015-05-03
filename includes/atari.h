@@ -7,12 +7,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <math.h> //! MUST BE REMOVED
 
 # include "libft.h"
 # include "list.h"
 
-#define SQRT_2			1.414213
-#define PI				3.141592
+# define INVINCIBLE_MODE	1
+
+# define SQRT_2			1.414213
+# define PI				3.141592
 
 # define WIN_WIDTH		600
 # define WIN_HEIGHT		600
@@ -77,6 +80,12 @@
 # define NE				 1.f,  1.f
 # define SE				 1.f, -1.f
 # define SW				-1.f, -1.f
+
+# define UI_LIFE_X		(-1.f + 0.1f)
+# define UI_LIFE_Y		(1.f - 0.1f)
+# define UI_LIFE_MARGIN	0.1f
+
+# define BALL_OUT_LIMIT	(-1.0f)
 
 enum
 {
@@ -156,17 +165,28 @@ typedef struct		s_game
 	t_keys			*keys;
 }					t_game;
 
-int					rebound(t_ball *ball, t_brick *brick, int side);
-t_ball				*init_ball(void);
-int					update_ball(t_ball *ball, t_list_node *bricks);
-int					check_bounds(t_ball *ball);
-int					check_collisions(t_ball *ball, t_list_node *bricks);
-
 /*
 **		main.c
 */
 t_game				*get_game(void);
 void				reset_viewport(GLFWwindow *window);
+
+/*
+**		ball.c
+*/
+void				update_ball(t_ball *ball, t_list_node *bricks);
+void				handle_bounds(t_ball *ball);
+t_ball				*init_ball(void);
+
+/*
+**		collision.c
+*/
+int					check_collisions(t_ball *ball, t_list_node *bricks);
+
+/*
+**		rebound.c
+*/
+int					rebound(t_ball *ball, t_brick *brick, int side);
 
 /*
 **		glfw_handler.c

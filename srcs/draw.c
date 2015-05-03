@@ -66,6 +66,44 @@ static void			draw_pad(t_pad *pad)
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }
 
+void				draw_circle(float pos_x, float pos_y)
+{
+	float		x;
+	float		y;
+	int			i;
+
+	glBegin(GL_POLYGON);
+	glColor3ub(PINK);
+	i = 0;
+	while (i < 20)
+	{
+		x = pos_x + 0.02f * (cos(i * 2.0f * M_PI / 20.0f));
+		y = pos_y + 0.02f * (sin(i * 2.0f * M_PI / 20.0f));
+		glVertex2f(x, y);
+		i++;
+	}
+	glEnd();
+}
+
+void				draw_lives(int n_lives)
+{
+	int		i;
+
+	i = 0;
+	while (i < n_lives)
+	{
+		draw_circle(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.0f, UI_LIFE_Y);
+		draw_circle(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.04f, UI_LIFE_Y);
+		glBegin(GL_TRIANGLES);
+		glColor3ub(PINK);
+		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.02f, UI_LIFE_Y + -0.06f);
+		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + 0.061f, UI_LIFE_Y + 0.0f);
+		glVertex2f(UI_LIFE_X + i * UI_LIFE_MARGIN + -0.022f, UI_LIFE_Y + 0.0f);
+		glEnd();
+		i++;
+	}
+}
+
 void				draw_level(t_level *level)
 {
 	t_list_node		*cursor;
@@ -84,5 +122,6 @@ void				draw_level(t_level *level)
 	update_pad(level->pad);
 	draw_pad(level->pad);
 	draw_level_border();
+	draw_lives(level->lives);
 }
 
