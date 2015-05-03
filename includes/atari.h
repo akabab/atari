@@ -1,7 +1,7 @@
 #ifndef ATARI_H
 # define ATARI_H
 
-# define GLFW_INCLUDE_GLU
+// # define GLFW_INCLUDE_GLU
 
 # include "libft.h"
 # include "list.h"
@@ -19,32 +19,49 @@
 # define LEVEL_HEIGHT	5
 # define LEVEL_MARGIN	0.05f
 
-# define BLOCK_WIDTH	((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH)
-# define BLOCK_HEIGHT	((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT)
-# define BLOCK_BORDER	0.008f
+# define BRICK_WIDTH	((2.0f - 2.f * LEVEL_MARGIN) / LEVEL_WIDTH)
+# define BRICK_HEIGHT	((0.5f - 2.f * LEVEL_MARGIN) / LEVEL_HEIGHT)
+# define BRICK_BORDER	0.008f
 
-# define NO_BLOCK_CHAR	'_'
-# define STATIC_BLOCK	9
+# define NO_BRICK_CHAR	'_'
+# define STATIC_BRICK	9
 
 # define N_LEVELS		3
 # define LEVEL_PATH		"./levels/level_"
 
 /*
 **		COLOR
+**						|R|, |G|, |B|
 */
-# define RED			"31"
-# define GREEN			"32"
-# define YELLOW			"33"
-# define BLUE			"34"
-# define PINK			"35"
-# define GRBL			"36"
-# define GREY			"37"
-# define NO				"0"
-# define C(X)			"\033["X"m"
-# define CC(X)			"\033[3"X"m"
-# define CB(X)			"\x1B[48;1;"X"m"
-# define CBNO			"\x1B[0m"
+# define PINK			217, 036, 105
+# define PURPLE			157, 124, 255
+# define CYAN			117, 176, 195
+# define YELLOW			227, 219, 115
+# define ORANGE			228, 126, 000
+# define GREEN			177, 227, 054
+# define BROWN			115, 111, 079
+# define DARK_GREY		044, 044, 039
+# define LIGHT_GREY		142, 143, 137
+# define BLACK			000, 000, 000
+# define WHITE			255, 255, 255
 
+/*
+**		CORNERS
+**
+**    NW      1     NE
+**            |
+**            |
+**    -1------|------1
+**            |
+**            |
+**    SW     -1     SE
+**
+**                        X ,  Y
+*/
+# define NW_CORNER		-1.f,  1.f
+# define NE_CORNER		 1.f,  1.f
+# define SE_CORNER		 1.f, -1.f
+# define SW_CORNER		-1.f, -1.f
 
 typedef struct		s_brick
 {
@@ -63,12 +80,22 @@ typedef struct		s_level
 int					initGLFW(GLFWwindow **window);
 int					cleanGLFW(GLFWwindow *window);
 
-void				load_levels(t_level levels[]);
+/*
+**		draw.c
+*/
 void				draw_level(t_level *level);
+
+/*
+**		level_loader.c
+*/
+void				load_levels(t_level levels[]);
 
 int					renderer(GLFWwindow *window, t_level *levels, t_ball *ball, int level_index);
 
-void	handle_errors(const char __func[], char *err, t_bool is_critic);
+/*
+**		err.c
+*/
+void				handle_errors(const char __func[], char *err, t_bool is_critic);
 
 
 #endif
