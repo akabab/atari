@@ -33,7 +33,7 @@
 # define NO_BRICK_CHAR		'_'
 # define STATIC_BRICK		9
 
-# define N_LEVELS			3
+# define N_LEVELS			9
 # define LEVEL_PATH			"./levels/level_"
 
 # define INIT_SCORE			0
