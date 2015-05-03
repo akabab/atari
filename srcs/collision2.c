@@ -6,7 +6,7 @@
 /*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/03 22:09:59 by tdieumeg          #+#    #+#             */
-/*   Updated: 2015/05/03 22:10:01 by tdieumeg         ###   ########.fr       */
+/*   Updated: 2015/05/03 22:15:25 by tdieumeg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int				check_tr_two(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					check_tl_two(t_ball *ball, t_brick *brick)
+int				check_tl_two(t_ball *ball, t_brick *brick)
 {
-	float			xb;
-	float			yb;
+	float		xb;
+	float		yb;
 
 	xb = ball->x - ((SQRT_2 / 2) * ball->r);
 	yb = ball->y + ((SQRT_2 / 2) * ball->r);
@@ -62,10 +62,10 @@ int					check_tl_two(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					check_bl_two(t_ball *ball, t_brick *brick)
+int				check_bl_two(t_ball *ball, t_brick *brick)
 {
-	float			xb;
-	float			yb;
+	float		xb;
+	float		yb;
 
 	xb = ball->x - ((SQRT_2 / 2) * ball->r);
 	yb = ball->y - ((SQRT_2 / 2) * ball->r);
@@ -87,10 +87,10 @@ int					check_bl_two(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					check_br_two(t_ball *ball, t_brick *brick)
+int				check_br_two(t_ball *ball, t_brick *brick)
 {
-	float			xb;
-	float			yb;
+	float		xb;
+	float		yb;
 
 	xb = ball->x + ((SQRT_2 / 2) * ball->r);
 	yb = ball->y - ((SQRT_2 / 2) * ball->r);
