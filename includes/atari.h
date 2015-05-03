@@ -79,6 +79,10 @@
 # define SE				 1.f, -1.f
 # define SW				-1.f, -1.f
 
+# define UI_LIFE_X		(-1.f + 0.1f)
+# define UI_LIFE_Y		(1.f - 0.1f)
+# define UI_LIFE_MARGIN	0.1f
+
 enum
 {
 	NO_SEGM = 1 << 0,

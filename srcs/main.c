@@ -1,36 +1,5 @@
 #include "atari.h"
 
-void            draw_ball(float pos_x, float pos_y)
-{
-    float           x;
-    float           y;
-    int             i;
-
-    glBegin(GL_POLYGON);
-    glColor3ub(PINK);
-    i = 0;
-    while (i < 20)
-    {
-        x = pos_x + 0.02f * (cos(i * 2.0f * M_PI / 20.0f));
-        y = pos_y + 0.02f * (sin(i * 2.0f * M_PI / 20.0f));
-        glVertex2f(x, y);
-        i++;
-    }
-    glEnd();
-}
-
-void    draw_life(void)
-{
-    draw_ball(0.0f, 0.0f);
-    draw_ball(0.04f, 0.0f);
-    glBegin(GL_TRIANGLES);
-        glColor3ub(PINK);
-        glVertex3f(0.02f, -0.06f, 0);
-        glVertex3f(0.061f, 0.0f, 0);
-        glVertex3f(-0.022f, 0.0f, 0);
-    glEnd();
-}
-
 void	reset_viewport(GLFWwindow *window)
 {
 	float	ratio;
@@ -96,8 +65,6 @@ int		main(int ac, char *av[])
 		glMatrixMode(GL_MODELVIEW);
 		/* Render here */
 		render(window, game);
-
-		draw_life();
 
 		//Check collision
 
