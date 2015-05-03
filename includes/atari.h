@@ -83,6 +83,8 @@
 # define UI_LIFE_Y		(1.f - 0.1f)
 # define UI_LIFE_MARGIN	0.1f
 
+# define BALL_OUT_LIMIT	(-1.0f)
+
 enum
 {
 	NO_SEGM = 1 << 0,
@@ -161,17 +163,28 @@ typedef struct		s_game
 	t_keys			*keys;
 }					t_game;
 
-int					rebound(t_ball *ball, t_brick *brick, int side);
-t_ball				*init_ball(void);
-int					update_ball(t_ball *ball, t_list_node *bricks);
-int					check_bounds(t_ball *ball);
-int					check_collisions(t_ball *ball, t_list_node *bricks);
-
 /*
 **		main.c
 */
 t_game				*get_game(void);
 void				reset_viewport(GLFWwindow *window);
+
+/*
+**		ball.c
+*/
+void				update_ball(t_ball *ball, t_list_node *bricks);
+void				handle_bounds(t_ball *ball);
+t_ball				*init_ball(void);
+
+/*
+**		collision.c
+*/
+int					check_collisions(t_ball *ball, t_list_node *bricks);
+
+/*
+**		rebound.c
+*/
+int					rebound(t_ball *ball, t_brick *brick, int side);
 
 /*
 **		glfw_handler.c
