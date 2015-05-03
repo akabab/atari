@@ -6,7 +6,7 @@
 /*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/03 22:10:25 by tdieumeg          #+#    #+#             */
-/*   Updated: 2015/05/03 22:13:44 by tdieumeg         ###   ########.fr       */
+/*   Updated: 2015/05/03 22:21:00 by tdieumeg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,8 @@ t_pad				*init_pad(void);
 /*
 **		err.c
 */
-void				handle_errors(const char func[], char *err, t_bool is_critic);
+void				handle_errors(const char func[],
+						char *err, t_bool is_critic);
 
 /*
 **		level.c
