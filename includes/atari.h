@@ -77,8 +77,13 @@ typedef struct		s_level
 	t_list_node		*brick_list;
 }					t_level;
 
-int					initGLFW(GLFWwindow **window);
-int					cleanGLFW(GLFWwindow *window);
+void				reset_viewport(GLFWwindow *window);
+
+/*
+**		glfw_handler.c
+*/
+int					glfw_init(GLFWwindow **window);
+int					glfw_clean(GLFWwindow *window);
 
 /*
 **		draw.c

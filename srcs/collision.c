@@ -3,24 +3,26 @@
 #include "atari.h"
 #include "ball.h"
 
-int					checkCollisions(t_ball *ball, t_list **bricks)
+int				check_collisions(t_ball *ball, t_list **bricks)
 {
 	t_list			*current;
 
 	current = *bricks;
 	while (current->next != NULL)
 	{
-		if (checkTopR(ball, current->value) ||
-				checkTopL(ball, current->value) ||
-				checkBotR(ball, current->value) ||
-				checkBotL(ball, current->value))
+		if (check_top_right(ball, current->value)
+			|| check_top_left(ball, current->value)
+			|| check_bottom_left(ball, current->value))
+			|| check_bottom_right(ball, current->value)
+		{
 			break ;
+		}
 		current = current->next;
 	}
 	return (1);
 }
 
-int					checkTopR(t_ball *ball, t_brick *brick)
+static int		check_top_right(t_ball *ball, t_brick *brick)
 {
 	if (ball->rad >= 0 && ball->rad <= (M_PI / 2))
 	{
@@ -36,7 +38,7 @@ int					checkTopR(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					checkTopL(t_ball *ball, t_brick *brick)
+static int		check_top_left(t_ball *ball, t_brick *brick)
 {
 	if (ball->rad > (M_PI / 2)  && ball->rad <= M_PI)
 	{
@@ -52,7 +54,7 @@ int					checkTopL(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					checkBotL(t_ball *ball, t_brick *brick)
+static int		check_bottom_left(t_ball *ball, t_brick *brick)
 {
 	if (ball->rad > (M_PI)  && ball->rad <= (3 * M_PI) / 2)
 	{
@@ -68,7 +70,7 @@ int					checkBotL(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					checkBotR(t_ball *ball, t_brick *brick)
+static int		check_bottom_right(t_ball *ball, t_brick *brick)
 {
 	if (ball->rad > (3 * M_PI) / 2 && ball->rad < (2 * M_PI))
 	{

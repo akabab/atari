@@ -1,10 +1,8 @@
-#include <math.h>
-#include <glfw3.h>
-#include "libft.h"
 #include "atari.h"
 #include "ball.h"
+#include <math.h>
 
-int					initBall(t_ball *ball)
+int					init_ball(t_ball *ball)
 {
 	ball->x = BALL_ORIGIN_X;
 	ball->y = BALL_ORIGIN_Y;
@@ -14,17 +12,17 @@ int					initBall(t_ball *ball)
 	return (1);
 }
 
-int					updateBall(t_ball *ball)
+int					update_ball(t_ball *ball)
 {
 	ball->x += ball->speed * cos(ball->rad);
 	ball->y += ball->speed * sin(ball->rad);
-	if (!checkBounds(ball))
+	if (!check_bounds(ball))
 		return (0);
 	//checkCollisions(ball);
 	return (1);
 }
 
-int					checkBounds(t_ball *ball)
+int					check_bounds(t_ball *ball)
 {
 	if ((ball->x + ball->r) >= (1.0f - LEVEL_MARGIN) ||
 			(ball->x - ball->r) <= (-1.0f + LEVEL_MARGIN))
@@ -38,7 +36,7 @@ int					checkBounds(t_ball *ball)
 }
 
 
-void				drawBall(t_ball *ball)
+void				draw_ball(t_ball *ball)
 {
 	float			x;
 	float			y;

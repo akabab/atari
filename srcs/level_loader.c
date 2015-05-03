@@ -1,9 +1,7 @@
-#include <fcntl.h>
-#include <glfw3.h>
 #include "atari.h"
-#include "libft.h"
+#include <fcntl.h>
 
-void	init_level_BRICK(t_level *level, int x, int y, int val)
+static void		push_level_brick(t_level *level, int x, int y, int val)
 {
 	t_brick		*new_brick;
 
@@ -16,7 +14,7 @@ void	init_level_BRICK(t_level *level, int x, int y, int val)
 	list_push_back(&level->brick_list, new_brick);
 }
 
-void	parse_level(int fd, t_level *level)
+static void		parse_level(int fd, t_level *level)
 {
 	char	*line;
 	int		x;
@@ -35,7 +33,7 @@ void	parse_level(int fd, t_level *level)
 		while (line[x] != '\0')
 		{
 			if (line[x] != NO_BRICK_CHAR)
-				init_level_BRICK(level, x, y, line[x] - '0');
+				push_level_brick(level, x, y, line[x] - '0');
 			x++;
 		}
 		if (line)
@@ -46,7 +44,7 @@ void	parse_level(int fd, t_level *level)
 		handle_errors(__func__, "wrong height!", TRUE);
 }
 
-void	load_levels(t_level levels[])
+void			load_levels(t_level levels[])
 {
 	int		fd[N_LEVELS];
 	int		i;
@@ -58,7 +56,7 @@ void	load_levels(t_level levels[])
 	{
 		level_index = ft_itoa(i);
 		path = ft_strjoin(LEVEL_PATH, level_index);
-		ft_printf("loading %s ..\n", path);
+		ft_printf("loading %s ..\n", path); //
 		if ((fd[i] = open(path, O_RDONLY)) == -1)
 			exit(EXIT_FAILURE);
 		parse_level(fd[i], &levels[i]);

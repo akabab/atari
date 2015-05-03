@@ -1,7 +1,3 @@
-#include <glfw3.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft.h"
 #include "atari.h"
 
 static void			error_callback(int error, const char *description)
@@ -16,12 +12,12 @@ static void			key_callback(GLFWwindow *window, int key, int scancode, int action
 }
 
 /* received new win size after resize */
-void				window_size_callback(GLFWwindow *window, int width, int height)
+static void			window_size_callback(GLFWwindow *window, int width, int height)
 {
     // ft_printf("resize-> width: %d, height: %d\n", width, height);
 }
 
-int					initGLFW(GLFWwindow **window)
+int					init_glfw(GLFWwindow **window)
 {
     glfwSetErrorCallback(error_callback);
     /* Initialize the library */
@@ -45,7 +41,7 @@ int					initGLFW(GLFWwindow **window)
 	return (1);
 }
 
-int					cleanGLFW(GLFWwindow *window)
+int					clean_glfw(GLFWwindow *window)
 {
     /* clear all before end */
     glfwDestroyWindow(window);

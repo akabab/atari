@@ -6,7 +6,7 @@
 #    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/03 12:36:35 by ycribier         ###   ########.fr        #
+#    Updated: 2015/05/03 13:33:34 by ycribier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW
 
 # source files
 SRCS			= main.c \
-				  initGLFW.c \
+				  glfw_handler.c \
 				  level_loader.c \
 				  ball.c \
 				  renderer.c \

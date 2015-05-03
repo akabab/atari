@@ -18,10 +18,11 @@ typedef struct		s_ball
 	float			rad;
 }					t_ball;
 
-int					initBall(t_ball *ball);
-int					updateBall(t_ball *ball);
-int					checkBounds(t_ball *ball);
-int					checkCollisions(t_ball *ball, t_list *bricks);
-void				drawBall(t_ball *ball);
+int					init_ball(t_ball *ball);
+int					update_ball(t_ball *ball);
+int					check_bounds(t_ball *ball);
+void				draw_ball(t_ball *ball);
+
+int					check_collisions(t_ball *ball, t_list *bricks);
 
 #endif
