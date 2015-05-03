@@ -4,7 +4,6 @@ static void			draw_circle(float pos_x, float pos_y)
 {
 	float			x;
 	float			y;
-	int				i;
 	float			radius;
 
 	radius = 0.02f;

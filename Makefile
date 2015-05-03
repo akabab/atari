@@ -25,7 +25,8 @@ LIBGLFW			= $(GLFW_LIB_DIR)/src/libglfw3.a
 # compil flags
 FRAMEWORK		= -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework GLUT
 LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
-CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW # -Wall -Wextra -Werror
+CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW -Wno-deprecated
+NFLAGS			= -Wall -Wextra -Werror
 
 # source files
 SRCS			= main.c \
@@ -49,10 +50,10 @@ OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
 all: $(CMAKE) openGLlib/CMakeLists.txt $(LIBGLFW) $(LIBFT) $(OBJDIR) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	@ $(CC) $^ -o $@ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $< -o $@ -c $(CFLAGS)
+	@ $(CC) $< -o $@ -c $(CFLAGS) $(NFLAGS)
 
 $(OBJDIR):
 	$(MKDIR) $@

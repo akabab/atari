@@ -1,7 +1,5 @@
 #include "atari.h"
 
-#include <stdio.h>
-
 static int				check_pad(t_ball *ball, t_pad *pad)
 {
 	float			xb;

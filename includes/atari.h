@@ -9,11 +9,13 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # include "libft.h"
 # include "list.h"
 
-# define INVINCIBLE_MODE	1
+# define INVINCIBLE_MODE	0
+# define WIN_RESIZABLE		0
 
 # define SQRT_2			1.414213
 # define PI				3.141592
