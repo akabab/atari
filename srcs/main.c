@@ -1,57 +1,76 @@
-#include <glfw3.h>
-#include "libft.h"
 #include "atari.h"
-#include "ball.h"
 
-#include <unistd.h>
-
-void draw_rect(double largeur,double hauteur)
+void	reset_viewport(GLFWwindow *window)
 {
-    glBegin(GL_QUADS);
-    glVertex2d(0,-hauteur/2);
-    glVertex2d(0,hauteur/2);
-    glVertex2d(largeur,hauteur/2);
-    glVertex2d(largeur,-hauteur/2);
-    glEnd();
+	float	ratio;
+	int		width;
+	int		height;
+
+	glfwGetFramebufferSize(window, &width, &height);
+	ratio = width / (float)height;
+	glViewport(0, 0, width, height);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
-int main(int ac, char *av[])
+// void			free_all(t_ps *ps)
+// {
+// 	t_env	*e;
+
+// 	if ((e = mlx_env_instance(NULL)))
+// 		free_env(e);
+// 	dlist_destroy(ps->stack_a);
+// 	dlist_destroy(ps->stack_b);
+// 	free(ps->origin_data);
+// 	free(ps);
+// }
+
+t_game		*get_game(void)
 {
-    GLFWwindow	*window;
-    t_level     levels[N_LEVELS];
-	t_ball		ball;
-	int			level_index;
+	static t_game	*game = NULL;
 
-	level_index = ac > 1 ? ft_atoi(av[1]) : 0;
-	initGLFW(&window);
-    load_levels(levels);
-	initBall(&ball);
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        float ratio;
-        int width, height;
-
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = width / (float) height;
-
-        glViewport(0, 0, width, height);
-        //clear screen
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        glMatrixMode(GL_MODELVIEW);
-
-		renderer(window, levels, &ball, level_index);
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-        /* Poll for and process events */
-        glfwPollEvents();
+	if (!game)
+	{
+		game = (t_game *)ft_memalloc(sizeof(t_game));
+		if (!game)
+			exit(EXIT_FAILURE);
+		load_levels(game->levels);
+		game->keys = init_keys();
 	}
-	cleanGLFW(window);
-    return (0);
+	return (game);
+}
+
+void	render(GLFWwindow *window, t_game *game)
+{
+	draw_level(game->levels[game->cur_level_index]);
+}
+
+int		main(int ac, char *av[])
+{
+	GLFWwindow	*window;
+	t_game		*game;
+
+	init_glfw(&window);
+	game = get_game();
+	game->cur_level_index = ac > 1 ? ft_atoi(av[1]) : 0; //
+
+	/* Loop until the user closes the window */
+	while (!glfwWindowShouldClose(window))
+	{
+		reset_viewport(window);
+		glMatrixMode(GL_MODELVIEW);
+		/* Render here */
+		render(window, game);
+
+		//Check collision
+
+		/* Swap front and back buffers */
+		glfwSwapBuffers(window);
+		/* Poll for and process events */
+		glfwPollEvents();
+	}
+	clean_glfw(window);
+	return (0);
 }

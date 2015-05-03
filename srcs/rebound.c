@@ -1,6 +1,4 @@
-#include <math.h>
 #include "atari.h"
-#include "ball.h"
 
 int					rebound(t_ball *ball, t_brick *brick, int side)
 {

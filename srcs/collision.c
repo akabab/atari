@@ -1,11 +1,6 @@
-#include <math.h>
-#include "list.h"
 #include "atari.h"
-#include "ball.h"
 
-#define B(X) brick->X
-
-static int			checkTopR(t_ball *ball, t_brick *brick)
+static int		check_top_right(t_ball *ball, t_brick *brick)
 {
 	float			xb;
 	float			yb;
@@ -39,7 +34,7 @@ static int			checkTopR(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-static int			checkTopL(t_ball *ball, t_brick *brick)
+static int		check_top_left(t_ball *ball, t_brick *brick)
 {
 	float			xb;
 	float			yb;
@@ -73,7 +68,7 @@ static int			checkTopL(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-static int			checkBotL(t_ball *ball, t_brick *brick)
+static int		check_bottom_left(t_ball *ball, t_brick *brick)
 {
 	float			xb;
 	float			yb;
@@ -107,7 +102,7 @@ static int			checkBotL(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-static int			checkBotR(t_ball *ball, t_brick *brick)
+static int		check_bottom_right(t_ball *ball, t_brick *brick)
 {
 	float			xb;
 	float			yb;
@@ -141,26 +136,27 @@ static int			checkBotR(t_ball *ball, t_brick *brick)
 	return (0);
 }
 
-int					checkCollisions(t_ball *ball, t_list_node **bricks)
+int				check_collisions(t_ball *ball, t_list_node *bricks)
 {
-	t_list_node		*current;
+	t_list_node		*cursor;
 	t_brick			*cur_brick;
 
-	current = *bricks;
-	while (current != NULL)
+	cursor = bricks;
+	while (cursor != NULL)
 	{
-		cur_brick = (t_brick *)current->value;
+		cur_brick = (t_brick *)cursor->value;
 		if (cur_brick->val &&
-				(checkTopR(ball, cur_brick) ||
-				 checkTopL(ball, cur_brick) ||
-				 checkBotR(ball, cur_brick) ||
-				 checkBotL(ball, cur_brick)))
+				(check_top_right(ball, cur_brick) ||
+				 check_top_left(ball, cur_brick) ||
+				 check_bottom_right(ball, cur_brick) ||
+				 check_bottom_left(ball, cur_brick)))
 		{
-			if (cur_brick->val && cur_brick->val != STATIC_BLOCK)
+			if (cur_brick->val && cur_brick->val != STATIC_BRICK)
 				cur_brick->val--;
 			break ;
 		}
-		current = current->next;
+		cursor = cursor->next;
 	}
 	return (1);
 }
+

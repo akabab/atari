@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+         #
+#    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/02 22:09:55 by tdieumeg         ###   ########.fr        #
+#    Updated: 2015/05/03 15:59:52 by tdieumeg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,14 @@ CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW
 
 # source files
 SRCS			= main.c \
-				  initGLFW.c \
+				  glfw_handler.c \
 				  level_loader.c \
 				  ball.c \
-				  renderer.c
+				  collision.c \
+				  rebound.c \
+				  draw.c \
+				  keys.c \
+				  err.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))

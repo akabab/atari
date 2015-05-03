@@ -1,30 +1,16 @@
-#include <math.h>
-#include <glfw3.h>
-#include "libft.h"
 #include "atari.h"
-#include "ball.h"
 
-int					initBall(t_ball *ball)
-{
-	ball->x = BALL_ORIGIN_X;
-	ball->y = BALL_ORIGIN_Y;
-	ball->r = BALL_RADIUS;
-	ball->speed = BALL_ORIGIN_SPEED;
-	ball->rad = BALL_MVT_ANGLE;
-	return (1);
-}
-
-int					updateBall(t_ball *ball, t_list_node **bricks)
+int					update_ball(t_ball *ball, t_list_node *bricks)
 {
 	ball->x += ball->speed * cos(ball->rad);
 	ball->y += ball->speed * sin(ball->rad);
-	if (!checkBounds(ball))
+	if (!check_bounds(ball))
 		return (0);
-	checkCollisions(ball, bricks);
+	check_collisions(ball, bricks);
 	return (1);
 }
 
-int					checkBounds(t_ball *ball)
+int					check_bounds(t_ball *ball)
 {
 	if ((ball->x + ball->r) >= (1.0f - LEVEL_MARGIN))
 	{
@@ -48,22 +34,17 @@ int					checkBounds(t_ball *ball)
 	return (1);
 }
 
-
-void				drawBall(t_ball *ball)
+t_ball				*init_ball(void)
 {
-	float			x;
-	float			y;
-	int				i;
+	t_ball	*ball;
 
-	glBegin(GL_POLYGON);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	i = 0;
-	while (i < 20)
-	{
-		x = ball->x + ball->r * (cos(i * 2.0f * M_PI / 20.0f));
-		y = ball->y + ball->r * (sin(i * 2.0f * M_PI / 20.0f));
-		glVertex2f(x, y);
-		i++;
-	}
-	glEnd();
+	ball = (t_ball *)ft_memalloc(sizeof(t_ball));
+	if (!ball)
+		exit(EXIT_FAILURE);
+	ball->x = BALL_ORIGIN_X;
+	ball->y = BALL_ORIGIN_Y;
+	ball->r = BALL_RADIUS;
+	ball->speed = BALL_ORIGIN_SPEED;
+	ball->rad = BALL_MVT_ANGLE;
+	return (ball);
 }
