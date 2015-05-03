@@ -1,11 +1,19 @@
 #ifndef ATARI_H
 # define ATARI_H
 
-#include <stdlib.h>
-#include "ball.h"
+# define GLFW_INCLUDE_GLU
 
-# define WIN_WIDTH	800
+# include "libft.h"
+# include "list.h"
+# include "ball.h"
+# include <glfw3.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+# define WIN_WIDTH	600
 # define WIN_HEIGHT	600
+
+# define LEVEL_MARGIN	0.05f
 
 # define LEVEL_WIDTH	15
 # define LEVEL_HEIGHT	5
@@ -32,8 +40,19 @@
 # define CB(X)			"\x1B[48;1;"X"m"
 # define CBNO			"\x1B[0m"
 
+
+typedef struct		s_brick
+{
+	float			x0;
+	float			y0;
+	float			x1;
+	float			y1;
+	int				val;
+}					t_brick;
+
 typedef struct		s_level
 {
+	t_list_node		*brick_list;
 	int				blocks[LEVEL_HEIGHT][LEVEL_WIDTH];
 }					t_level;
 
