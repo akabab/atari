@@ -53,8 +53,6 @@ static void			draw_pad(t_pad *pad)
 	float	x0;
 	float	x1;
 
-	// x0 = pad->x0 - (PAD_INIT_WIDTH * pad->scale) / 2;
-	// x1 = pad->x1 + (PAD_INIT_WIDTH * pad->scale) / 2;
 	glColor3ub(DARK_GREY);
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }
@@ -64,7 +62,6 @@ void				draw_level(t_level *level)
 	t_list_node		*cursor;
 	t_brick			*cur_brick;
 
-	draw_level_border();
 	cursor = level->brick_list;
 	while (cursor)
 	{
@@ -77,5 +74,6 @@ void				draw_level(t_level *level)
 	draw_ball(level->ball);
 	update_pad(level->pad);
 	draw_pad(level->pad);
+	draw_level_border();
 }
 
