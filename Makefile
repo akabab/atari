@@ -23,7 +23,7 @@ LIBFT			= $(LIBFTDIR)/libft.a
 LIBGLFW			= $(GLFW_LIB_DIR)/src/libglfw3.a
 
 # compil flags
-FRAMEWORK		= -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+FRAMEWORK		= -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework GLUT
 LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
 CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW # -Wall -Wextra -Werror
 

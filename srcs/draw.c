@@ -94,24 +94,26 @@ static void			draw_circle(float pos_x, float pos_y)
 	}
 }
 
-// void				_draw_circle(float pos_x, float pos_y)
-// {
-// 	float		x;
-// 	float		y;
-// 	int			i;
+void	draw_text(float x, float y, char *str, void *font)
+{
+	int		len;
+	int		i;
 
-// 	glBegin(GL_POLYGON);
-// 	glColor3ub(PINK);
-// 	i = 0;
-// 	while (i < 20)
-// 	{
-// 		x = pos_x + 0.02f * (cos(i * 2.0f * M_PI / 20.0f));
-// 		y = pos_y + 0.02f * (sin(i * 2.0f * M_PI / 20.0f));
-// 		glVertex2f(x, y);
-// 		i++;
-// 	}
-// 	glEnd();
-// }
+	glRasterPos2f(x,y);
+	len = ft_strlen(str);
+	i = 0;
+	while (i < len)
+	{
+		glutBitmapCharacter(font, str[i]);
+		i++;
+	}
+}
+
+void				draw_score(int score)
+{
+	char	*score_str;
+
+}
 
 void				draw_lives(int n_lives)
 {
@@ -151,5 +153,7 @@ void				draw_level(t_level *level)
 	draw_pad(level->pad);
 	draw_level_border();
 	draw_lives(level->lives);
+	glColor3ub(WHITE);
+	draw_text(0.f, 0.f, "Heloo", TEXT_FONT);
 }
 

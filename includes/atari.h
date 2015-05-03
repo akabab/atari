@@ -4,6 +4,8 @@
 // # define GLFW_INCLUDE_GLU
 
 # include <glfw3.h>
+#include <GLUT/glut.h>
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -53,6 +55,8 @@
 # define LIGHT_GREY		142, 143, 137
 # define BLACK			  0,   0,   0
 # define WHITE			255, 255, 255
+
+# define TEXT_FONT		GLUT_BITMAP_9_BY_15
 
 /*
 **		CORNERS
