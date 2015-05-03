@@ -1,6 +1,16 @@
-#include "atari.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pad.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/03 22:13:03 by tdieumeg          #+#    #+#             */
+/*   Updated: 2015/05/03 22:13:12 by tdieumeg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "atari.h"
 
 static int				check_pad_two(t_ball *ball, t_pad *pad)
 {
@@ -65,7 +75,7 @@ void					update_pad(t_pad *pad, t_ball *ball)
 	check_pad(ball, pad);
 }
 
-t_pad				*init_pad(void)
+t_pad					*init_pad(void)
 {
 	t_pad	*pad;
 

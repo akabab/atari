@@ -4,7 +4,6 @@ static void			draw_circle(float pos_x, float pos_y)
 {
 	float			x;
 	float			y;
-	int				i;
 	float			radius;
 
 	radius = 0.02f;
@@ -52,7 +51,7 @@ void				draw_text(float x, float y, char *str, void *font)
 	int		len;
 	int		i;
 
-	glRasterPos2f(x,y);
+	glRasterPos2f(x, y);
 	len = ft_strlen(str);
 	i = 0;
 	while (i < len)

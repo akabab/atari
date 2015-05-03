@@ -6,7 +6,7 @@
 /*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/03 22:10:25 by tdieumeg          #+#    #+#             */
-/*   Updated: 2015/05/03 22:10:37 by tdieumeg         ###   ########.fr       */
+/*   Updated: 2015/05/03 22:13:44 by tdieumeg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # include "libft.h"
 # include "list.h"
 
 # define INVINCIBLE_MODE	0
+# define WIN_RESIZABLE		0
 
 # define SQRT_2			1.414213
 # define PI				3.141592
@@ -248,7 +250,7 @@ t_pad				*init_pad(void);
 /*
 **		err.c
 */
-void				handle_errors(const char __func[], char *err, t_bool is_critic);
+void				handle_errors(const char func[], char *err, t_bool is_critic);
 
 /*
 **		level.c

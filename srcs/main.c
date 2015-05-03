@@ -1,6 +1,6 @@
 #include "atari.h"
 
-void	reset_viewport(GLFWwindow *window)
+void			reset_viewport(GLFWwindow *window)
 {
 	float	ratio;
 	int		width;
@@ -15,7 +15,7 @@ void	reset_viewport(GLFWwindow *window)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
-void		free_all()
+void			free_all(void)
 {
 	t_game		*game;
 
@@ -29,7 +29,7 @@ void		free_all()
 	free(game);
 }
 
-t_game		*get_game(void)
+t_game			*get_game(void)
 {
 	static t_game	*game = NULL;
 
@@ -44,12 +44,12 @@ t_game		*get_game(void)
 	return (game);
 }
 
-void	render(GLFWwindow *window, t_game *game)
+static void		render(t_game *game)
 {
 	draw_level(game->levels[game->cur_level_index]);
 }
 
-int		main(int ac, char *av[])
+int				main(int ac, char *av[])
 {
 	GLFWwindow	*window;
 	t_game		*game;
@@ -60,17 +60,12 @@ int		main(int ac, char *av[])
 	while (!glfwWindowShouldClose(window))
 	{
 		handle_levels(game);
-
 		reset_viewport(window);
 		glMatrixMode(GL_MODELVIEW);
 		/* Render here */
-		render(window, game);
-
+		render(game);
 		//Check collision
-
-		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
-		/* Poll for and process events */
 		glfwPollEvents();
 	}
 	clean_glfw(window);

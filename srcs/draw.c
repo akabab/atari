@@ -1,13 +1,11 @@
 #include "atari.h"
 
-#include <stdio.h>
-
 static void			draw_level_border(void)
 {
 	glColor3ub(PURPLE);
-	glRectf(NW, NE - LEVEL_MARGIN); //top
-	glRectf(NW, -1.f + LEVEL_MARGIN, -1.f); //left
-	glRectf(1.f - LEVEL_MARGIN, 1.f, SE); //right
+	glRectf(NW, NE - LEVEL_MARGIN);
+	glRectf(NW, -1.f + LEVEL_MARGIN, -1.f);
+	glRectf(1.f - LEVEL_MARGIN, 1.f, SE);
 }
 
 static void			draw_brick(t_brick *brick)
@@ -18,7 +16,7 @@ static void			draw_brick(t_brick *brick)
 	glRectf(brick->x0, brick->y1,
 			brick->x1, brick->y0);
 	val = brick->val;
-	if (val == 1) //USE MACROS
+	if (val == 1)
 		glColor3ub(GREEN);
 	else if (val == 2)
 		glColor3ub(ORANGE);
@@ -36,7 +34,6 @@ static void			draw_ball(t_ball *ball)
 {
 	float			x;
 	float			y;
-	int				i;
 
 	y = -ball->r;
 	while (y <= ball->r)
@@ -60,9 +57,6 @@ static void			draw_ball(t_ball *ball)
 
 static void			draw_pad(t_pad *pad)
 {
-	float	x0;
-	float	x1;
-
 	glColor3ub(DARK_GREY);
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }
@@ -88,4 +82,3 @@ void				draw_level(t_level *level)
 	draw_lives(level->lives);
 	draw_score(level->score);
 }
-
