@@ -3,8 +3,6 @@
 #include "atari.h"
 #include "ball.h"
 
-#include <unistd.h>
-
 void draw_rect(double largeur,double hauteur)
 {
     glBegin(GL_QUADS);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+         #
+#    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/02 22:09:55 by tdieumeg         ###   ########.fr        #
+#    Updated: 2015/05/03 12:23:00 by ycribier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRCS			= main.c \
 				  initGLFW.c \
 				  level_loader.c \
 				  ball.c \
-				  renderer.c
+				  renderer.c \
+				  err.c
 
 # obj
 OBJS			= $(patsubst %.c, $(OBJDIR)/%.o, $(SRCS))
