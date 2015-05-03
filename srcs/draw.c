@@ -50,6 +50,11 @@ static void			draw_ball(t_ball *ball)
 
 static void			draw_pad(t_pad *pad)
 {
+	float	x0;
+	float	x1;
+
+	// x0 = pad->x0 - (PAD_INIT_WIDTH * pad->scale) / 2;
+	// x1 = pad->x1 + (PAD_INIT_WIDTH * pad->scale) / 2;
 	glColor3ub(DARK_GREY);
 	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
 }

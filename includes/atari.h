@@ -76,6 +76,18 @@
 # define SE				 1.f, -1.f
 # define SW				-1.f, -1.f
 
+enum
+{
+	NO_SEGM = 1 << 0,
+	SEGM_1 = 1 << 1,
+	SEGM_2 = 1 << 2,
+	SEGM_3 = 1 << 3,
+	SEGM_4 = 1 << 4,
+	SEGM_5 = 1 << 5,
+	SEGM_6 = 1 << 6,
+	SEGM_7 = 1 << 7
+};
+
 typedef struct		s_brick
 {
 	float			x0;
