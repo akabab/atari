@@ -15,17 +15,19 @@ void	reset_viewport(GLFWwindow *window)
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 }
 
-// void			free_all(t_ps *ps)
-// {
-// 	t_env	*e;
+void		free_all()
+{
+	t_game		*game;
 
-// 	if ((e = mlx_env_instance(NULL)))
-// 		free_env(e);
-// 	dlist_destroy(ps->stack_a);
-// 	dlist_destroy(ps->stack_b);
-// 	free(ps->origin_data);
-// 	free(ps);
-// }
+	game = get_game();
+	if (!game)
+		exit(EXIT_FAILURE);
+	//free game->levels[]
+	//	- free(level->pad);
+	//	- free(level->ball);
+	//	- list_clear_destroy(level->brick_list);
+	free(game);
+}
 
 t_game		*get_game(void)
 {
