@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   atari.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdieumeg <tdieumeg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/05/03 22:10:25 by tdieumeg          #+#    #+#             */
+/*   Updated: 2015/05/03 22:10:37 by tdieumeg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ATARI_H
 # define ATARI_H
 
 // # define GLFW_INCLUDE_GLU
 
 # include <glfw3.h>
-#include <GLUT/glut.h>
+# include <GLUT/glut.h>
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -13,7 +25,7 @@
 # include "libft.h"
 # include "list.h"
 
-# define INVINCIBLE_MODE	1
+# define INVINCIBLE_MODE	0
 
 # define SQRT_2			1.414213
 # define PI				3.141592
@@ -41,6 +53,7 @@
 
 # define B(X)			brick->X
 # define P(X)			pad->X
+
 /*
 **		COLOR
 **						|R|, |G|, |B|
@@ -190,6 +203,14 @@ t_ball				*init_ball(void);
 **		collision.c
 */
 int					check_collisions(t_ball *ball, t_list_node *bricks);
+
+/*
+**		collision2.c
+*/
+int					check_tr_two(t_ball *ball, t_brick *brick);
+int					check_tl_two(t_ball *ball, t_brick *brick);
+int					check_bl_two(t_ball *ball, t_brick *brick);
+int					check_br_two(t_ball *ball, t_brick *brick);
 
 /*
 **		rebound.c

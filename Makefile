@@ -32,6 +32,7 @@ SRCS			= main.c \
 				glfw_handler.c \
 				level_loader.c \
 				collision.c \
+				collision2.c \
 				rebound.c \
 				draw.c \
 				draw_ui.c \

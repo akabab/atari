@@ -2,20 +2,11 @@
 
 #include <stdio.h>
 
-static int				check_pad(t_ball *ball, t_pad *pad)
+static int				check_pad_two(t_ball *ball, t_pad *pad)
 {
 	float			xb;
 	float			yb;
 
-	xb = ball->x;
-	yb = ball->y - ball->r;
-	if (xb >= P(x0) && xb <= P(x1) &&
-			yb >= P(y0) && yb <= P(y1))
-	{
-		ball->speedy = -ball->speedy;
-		ball->y += ball->r;
-		return (1);
-	}
 	xb = ball->x + ((SQRT_2 / 2) * ball->r);
 	yb = ball->y - ((SQRT_2 / 2) * ball->r);
 	if (xb >= P(x0) && xb <= P(x1) &&
@@ -35,6 +26,23 @@ static int				check_pad(t_ball *ball, t_pad *pad)
 		return (1);
 	}
 	return (0);
+}
+
+static int				check_pad(t_ball *ball, t_pad *pad)
+{
+	float			xb;
+	float			yb;
+
+	xb = ball->x;
+	yb = ball->y - ball->r;
+	if (xb >= P(x0) && xb <= P(x1) &&
+			yb >= P(y0) && yb <= P(y1))
+	{
+		ball->speedy = -ball->speedy;
+		ball->y += ball->r;
+		return (1);
+	}
+	return (check_pad_two(ball, pad));
 }
 
 void					update_pad(t_pad *pad, t_ball *ball)
