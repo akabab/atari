@@ -13,7 +13,7 @@ static void			draw_brick(t_brick *brick)
 	int		val;
 
 	glColor3ub(BLACK);
-	glRectf(brick->x0, brick->y0, brick->x1, brick->y1);
+	glRectf(brick->x0, brick->y1, brick->x1, brick->y0);
 	val = brick->val;
 	if (val == 1) //USE MACROS
 		glColor3ub(GREEN);
@@ -36,7 +36,7 @@ static void			draw_ball(t_ball *ball)
 	int				i;
 
 	glBegin(GL_POLYGON);
-	glColor3f(YELLOW);
+	glColor3ub(CYAN);
 	i = 0;
 	while (i < 20)
 	{
@@ -48,6 +48,16 @@ static void			draw_ball(t_ball *ball)
 	glEnd();
 }
 
+static void			draw_pad(t_pad *pad)
+{
+	float	x0;
+	float	x1;
+
+	// x0 = pad->x0 - (PAD_INIT_WIDTH * pad->scale) / 2;
+	// x1 = pad->x1 + (PAD_INIT_WIDTH * pad->scale) / 2;
+	glColor3ub(DARK_GREY);
+	glRectf(pad->x0, pad->y1, pad->x1, pad->y0);
+}
 
 void				draw_level(t_level *level)
 {
@@ -65,5 +75,7 @@ void				draw_level(t_level *level)
 	}
 	update_ball(level->ball, level->brick_list);
 	draw_ball(level->ball);
+	update_pad(level->pad);
+	draw_pad(level->pad);
 }
 

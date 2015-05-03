@@ -6,7 +6,7 @@
 #    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/05/01 20:08:49 by tdieumeg          #+#    #+#              #
-#    Updated: 2015/05/03 15:59:52 by tdieumeg         ###   ########.fr        #
+#    Updated: 2015/05/03 16:07:25 by ycribier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS			= main.c \
 				  collision.c \
 				  rebound.c \
 				  draw.c \
+				  pad.c \
 				  keys.c \
 				  err.c
 
