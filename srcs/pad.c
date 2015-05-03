@@ -17,10 +17,6 @@ void					update_pad(t_pad *pad)
 		pad->x0 -= pad->speed;
 		pad->x1 -= pad->speed;
 	}
-	if (keys->up == TRUE)
-		pad->scale += 0.001f;
-	if (keys->down == TRUE)
-		pad->scale -= 0.001f;
 }
 
 t_pad				*init_pad(void)

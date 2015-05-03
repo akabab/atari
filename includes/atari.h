@@ -203,7 +203,9 @@ t_pad				*init_pad(void);
 void				handle_errors(const char __func[], char *err, t_bool is_critic);
 
 /*
-**		math.c
+**		level.c
 */
-double				two_pi_modulo(double rad);
+void				load_level(t_game *game, int level_index);
+void				handle_levels(t_game *game);
+
 #endif

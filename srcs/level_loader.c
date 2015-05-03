@@ -66,6 +66,8 @@ void			load_levels(t_level *levels[])
 	char	*level_index;
 
 	i = 0;
+	if (N_LEVELS == 0)
+		handle_errors(__func__, "N_LEVELS is null!", TRUE);
 	while (i < N_LEVELS)
 	{
 		level_index = ft_itoa(i);

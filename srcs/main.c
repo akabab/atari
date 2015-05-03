@@ -87,11 +87,11 @@ int		main(int ac, char *av[])
 
 	init_glfw(&window);
 	game = get_game();
-	game->cur_level_index = ac > 1 ? ft_atoi(av[1]) : 0; //
-
-	/* Loop until the user closes the window */
+	load_level(game, ac > 1 ? ft_atoi(av[1]) : 0);
 	while (!glfwWindowShouldClose(window))
 	{
+		handle_levels(game);
+
 		reset_viewport(window);
 		glMatrixMode(GL_MODELVIEW);
 		/* Render here */
