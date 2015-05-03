@@ -119,7 +119,7 @@ typedef struct		s_ball
 # define PAD_INIT_WIDTH		0.5f
 # define PAD_INIT_HEIGHT	0.08f
 # define PAD_INIT_SCALE		1.f
-# define PAD_INIT_SPEED		0.01f
+# define PAD_INIT_SPEED		0.03f
 
 typedef struct		s_pad
 {
