@@ -14,23 +14,34 @@ int					initBall(t_ball *ball)
 	return (1);
 }
 
-int					updateBall(t_ball *ball)
+int					updateBall(t_ball *ball, t_list_node **bricks)
 {
 	ball->x += ball->speed * cos(ball->rad);
 	ball->y += ball->speed * sin(ball->rad);
 	if (!checkBounds(ball))
 		return (0);
-	//checkCollisions(ball);
+	checkCollisions(ball, bricks);
 	return (1);
 }
 
 int					checkBounds(t_ball *ball)
 {
-	if ((ball->x + ball->r) >= (1.0f - LEVEL_MARGIN) ||
-			(ball->x - ball->r) <= (-1.0f + LEVEL_MARGIN))
+	if ((ball->x + ball->r) >= (1.0f - LEVEL_MARGIN))
+	{
 		ball->rad = fmod((M_PI - ball->rad), (2.0f * M_PI));
-	if ((ball->y + ball->r) >= (1.0f - LEVEL_MARGIN) ||
-		(ball->y - ball->r) <= (-1.0f + LEVEL_MARGIN))
+		ball->x = 1.0f - LEVEL_MARGIN - ball->r;
+	}
+	if ((ball->x - ball->r) <= (-1.0f + LEVEL_MARGIN))
+	{
+		ball->rad = fmod((M_PI - ball->rad), (2.0f * M_PI));
+		ball->x = -1.0f + LEVEL_MARGIN + ball->r;
+	}
+	if ((ball->y + ball->r) >= (1.0f - LEVEL_MARGIN))
+	{
+		ball->rad = (ball->rad) * -1;
+		ball->y = 1.0f - LEVEL_MARGIN - ball->r;
+	}
+	if ((ball->y - ball->r) <= (-1.0f + LEVEL_MARGIN))
 		ball->rad = (ball->rad) * -1;
 	//if (ball->y <= -1.0f)
 	//	return (0);
