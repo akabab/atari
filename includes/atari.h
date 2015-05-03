@@ -48,20 +48,29 @@
 /*
 **		CORNERS
 **
-**    NW      1     NE
+**    NW      N     NE
+**            1
 **            |
+**    W -1----|----1 E
 **            |
-**    -1------|------1
-**            |
-**            |
-**    SW     -1     SE
+**           -1
+**    SW      S     SE
 **
 **                        X ,  Y
 */
-# define NW_CORNER		-1.f,  1.f
-# define NE_CORNER		 1.f,  1.f
-# define SE_CORNER		 1.f, -1.f
-# define SW_CORNER		-1.f, -1.f
+# define N_X			 0.f
+# define N_Y			       1.f
+# define S_X			 0.f
+# define S_Y			      -1.f
+# define W_X			-1.f
+# define W_Y			       0.f
+# define E_X			 1.f
+# define E_Y			       0.f
+
+# define NW				-1.f,  1.f
+# define NE				 1.f,  1.f
+# define SE				 1.f, -1.f
+# define SW				-1.f, -1.f
 
 typedef struct		s_brick
 {

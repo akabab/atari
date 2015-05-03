@@ -3,9 +3,9 @@
 static void		draw_level_border(void)
 {
 	glColor3ub(PURPLE);
-	glRectf(NW_CORNER, NE_CORNER - LEVEL_MARGIN); //top
-	glRectf(NW_CORNER, -1.f + LEVEL_MARGIN, -1.f); //left
-	glRectf(1.f - LEVEL_MARGIN, 1.f, SE_CORNER); //right
+	glRectf(NW, NE - LEVEL_MARGIN); //top
+	glRectf(NW, -1.f + LEVEL_MARGIN, -1.f); //left
+	glRectf(1.f - LEVEL_MARGIN, 1.f, SE); //right
 }
 
 void			draw_brick(t_brick *brick)
@@ -44,3 +44,4 @@ void			draw_level(t_level *level)
 		cursor = cursor->next;
 	}
 }
+
