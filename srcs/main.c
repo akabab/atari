@@ -56,6 +56,11 @@ t_game			*get_game(void)
 static void		render(t_game *game)
 {
 	draw_level(game->levels[game->cur_level_index]);
+
+	// GLUquadric* params = gluNewQuadric();
+	// gluQuadricDrawStyle(params, GLU_FILL);
+	// gluSphere(params,0.15,1000,1000);
+	// gluDeleteQuadric(params);
 }
 
 int				main(int ac, char *av[])

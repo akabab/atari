@@ -26,7 +26,7 @@ LIBGLFW			= $(GLFW_LIB_DIR)/src/libglfw3.a
 FRAMEWORK		= -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework GLUT
 LDFLAGS			= -L $(GLFW_LIB_DIR)/src -lglfw3 $(FRAMEWORK) -L libft -lft
 CFLAGS			= -I $(INCDIR) -I $(LIBFTDIR)/includes/ -I $(GLFW_LIB_DIR)/include/GLFW -Wno-deprecated
-NFLAGS			= -Wall -Wextra -Werror
+NFLAGS			= # Wall -Wextra -Werror
 
 # source files
 SRCS			= main.c \
