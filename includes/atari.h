@@ -129,6 +129,7 @@ typedef struct		s_pad
 
 typedef struct		s_level
 {
+	int				active_bricks;
 	int				score;
 	int				lives;
 	t_list_node		*brick_list;

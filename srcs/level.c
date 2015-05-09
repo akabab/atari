@@ -2,17 +2,8 @@
 
 static t_bool		is_level_complete(t_level *level)
 {
-	t_list_node		*cursor;
-	t_brick			*cur_brick;
-
-	cursor = level->brick_list;
-	while (cursor)
-	{
-		cur_brick = (t_brick *)cursor->value;
-		if (cur_brick->val != STATIC_BRICK && cur_brick->val > 0)
-			return (FALSE);
-		cursor = cursor->next;
-	}
+	if (level->active_bricks)
+		return (FALSE);
 	return (TRUE);
 }
 

@@ -12,6 +12,8 @@ static void		push_level_brick(t_level *level, int x, int y, int val)
 	new_brick->y1 = 1.f - TOP_MARGIN
 					- (LEVEL_MARGIN + (float)y * BRICK_HEIGHT);
 	new_brick->val = val;
+	if (val != STATIC_BRICK)
+		level->active_bricks += 1;
 	list_push_back(&level->brick_list, new_brick);
 }
 
@@ -51,6 +53,7 @@ static t_level	*init_level(void)
 	level = (t_level *)ft_memalloc(sizeof(t_level));
 	if (!level)
 		exit(EXIT_FAILURE);
+	level->active_bricks = 0;
 	level->score = INIT_SCORE;
 	level->lives = INIT_LIVES;
 	level->brick_list = NULL;
